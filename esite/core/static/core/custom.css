@@ -1,0 +1,292 @@
+header {
+    background: #df00ff; /* 4c7fa7 */
+}
+
+.wagtail-logo-container__desktop {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin: 0 auto;
+    transition: all 0.25s cubic-bezier(0.28, 0.15, 0, 2.1);
+}
+
+a {
+    color: #df00ff;
+}
+
+a:hover {
+    color: #b200cc; /* 2a3c4a */
+}
+
+.button {
+    background-color: #df00ff;
+    border: 1px solid #df00ff;
+}
+
+.button:hover {
+    background-color: #b200cc;
+    border-color: transparent;
+}
+
+.button-secondary {
+    color: #df00ff;
+    background-color: transparent;
+}
+
+.button.disabled,
+.button:disabled,
+.button[disabled] {
+    background-color: #d9d9d9;
+    border-color: #d9d9d9;
+    color: #737373;
+}
+
+input[type="submit"] {
+    background-color: #df00ff;
+    border-color: #df00ff;
+}
+
+input[type="submit"]:hover {
+    background-color: #b200cc;
+    border-color: transparent;
+    color: #ffffff;
+}
+
+.dropdown .dropdown-toggle {
+    background-color: #b200cc !important;
+}
+
+.dropdown .dropdown-toggle:hover,
+.dropdown.open .dropdown-toggle {
+    background-color: #9c00b3 !important;
+}
+
+header .button {
+    background-color: #b200cc !important;
+}
+
+header .button:hover {
+    background-color: #9c00b3 !important; /* 36223f */
+}
+
+.tab-nav a {
+    background-color: #b200cc;
+    border-top: 0.3em solid #b200cc;
+}
+
+.tab-nav a:hover {
+    border-top: 0.3em solid #290041; /* 003f41 */
+}
+
+.tab-nav.merged {
+    background-color: #df00ff;
+}
+
+.nav-main .menu-item a:after {
+    top: 0.55em;
+}
+
+.button.yes {
+    background-color: #189370;
+    border: 1px solid #189370;
+}
+
+.button.yes:hover {
+    color: #ffffff;
+    border-color: transparent;
+    background-color: #127055;
+}
+
+.t-inverted .u-btn-current {
+    border-color: rgba(0, 0, 0, 0.35);
+}
+
+.breadcrumb li a:after,
+.breadcrumb li span:after {
+    top: 0.21em;
+    right: -0.3em;
+    color: #ffffff;
+}
+
+.breadcrumb li:hover {
+    background: #9c00b3;
+}
+
+@media screen and (min-width: 50em) {
+    .breadcrumb {
+        background-color: #b200cc;
+    }
+}
+
+.progress .bar {
+    background-color: #df00ff;
+}
+
+.progress {
+    background-color: #9c00b3;
+    border: 1px solid #df00ff;
+}
+
+.loading-mask.loading:after {
+    color: #df00ff;
+}
+
+.listing.chooser tbody tr:hover {
+    background-color: #df00ff;
+}
+
+input[type="radio"]:checked:before {
+    color: #df00ff;
+}
+
+input[type="checkbox"]:checked:before {
+    color: #df00ff;
+}
+
+.c-sf-add-button {
+    color: #df00ff !important;
+}
+
+.page-explorer .listing .index {
+    background-color: #df00ff;
+}
+
+.page-explorer .listing .index .button.bicolor {
+    background-color: #df00ff;
+}
+
+.page-explorer .listing .index .button:hover {
+    background-color: #b200cc;
+    border-color: transparent;
+}
+
+.t-inverted .u-btn-current:hover {
+    background-color: #b200cc;
+    border-color: rgba(0, 0, 0, 0.35);
+}
+
+.t-default .u-btn-current {
+    border-color: rgba(0, 0, 0, 0.15);
+    color: #df00ff;
+}
+
+.t-default .u-btn-current:hover {
+    background-color: #b200cc;
+    border-color: rgba(0, 0, 0, 0.35);
+}
+
+.listing .button-secondary:hover {
+    background-color: #b200cc;
+    border-color: transparent;
+}
+
+.listing .title h2 a:hover {
+    color: #b200cc;
+}
+
+.object > h2 {
+    background: #faf2fc !important;
+}
+
+.object > h2 label:before,
+.object > h2:before {
+    background-color: #b200cc !important;
+}
+
+.sequence-controls h3 label {
+    color: #b200cc;
+}
+
+@media screen and (min-width: 50em) {
+    .listing td.children:hover {
+        background-color: #b200cc;
+    }
+}
+
+.listing .children a {
+    color: #b200cc;
+    display: block;
+}
+
+@media screen and (min-width: 50em) {
+    .listing tr:hover .children {
+        background-color: #df00ff;
+    }
+}
+
+/*
+  .halloeditor:focus,
+  .tagit:focus,
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #eff4f8;
+    background-color: #f3eff2;
+  }
+
+  .full .Draftail-Editor--focus {
+    background-color: #eff4f8;
+    border-color: #b200cc;
+  }
+
+  li.sequence-member:hover {
+    background-color: #f2f2f3;
+    border-color: #df00ff;
+  }
+
+  .listing .no-children a:hover {
+    color: #df00ff;
+  }
+  */
+
+.dropdown ul {
+    background-color: #df00ff;
+}
+
+.dropdown ul a:hover {
+    background-color: #b200cc;
+}
+
+/*
+  .icon-bin {
+    background-color: #cd3238;
+    border: 1px solid #cd3238;
+  }
+  */
+
+.halloeditor:focus,
+.tagit:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    background-color: #fbf2fc;
+    border-color: #b200cc;
+}
+
+.c-sf-button:focus,
+.c-sf-button:hover {
+    background-color: #b200cc !important;
+}
+
+.full .Draftail-Editor--focus {
+    background-color: #fbf2fc !important;
+    border-color: #b200cc !important;
+}
+
+.wagtail-logo-container__desktop .wagtail-logo-container-inner {
+    width: 99px !important;
+    height: 99px !important;
+    margin: auto;
+    position: relative;
+}
+
+.replace-file-input:hover button {
+    background-color: #b200cc !important;
+}
+
+/**
+ * SPDX-License-Identifier: (EUPL-1.2)
+ * Copyright © 2019 Werbeagentur Christian Aichner
+ */

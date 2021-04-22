@@ -1,0 +1,17 @@
+<!--
+  SPDX-License-Identifier: (EUPL-1.2)
+  Copyright © Simon Prast
+-->
+<input
+    type="text"
+    name="{{ name }}"
+    {%
+    if
+    value
+    %}value="{{ value }}"
+    {%
+    endif
+    %}
+    id="{{ attrs.id }}"
+    class="colorfield_field jscolor {hash:true}"
+/>
