@@ -1,18 +1,18 @@
 <p align="center">
   <a href="https://snek.at/" target="_blank" rel="noopener noreferrer">
-    <img src="https://avatars2.githubusercontent.com/u/55870326?s=400&u=c6c7f06305ddc94747d474850fde7b2044f53838&v=4" alt="SNEK Logo" height="150">
+    <img src="https://user-images.githubusercontent.com/26285351/115684229-7aa44400-a357-11eb-917b-8d80d6c3e5d1.png" alt="tuwien-club logo" height="150">
   </a>
 </p>
 
-<h3 align="center">SNEK - Offical Wagtail Template</h3>
+<h3 align="center">tuwien-club - Compact Content Management System</h3>
 
 <p align="center">
-  This is the official template repository for Wagtail projects of SNEK.
+  This is the official CCMS projects of tuwien-club.
   <br>
   <br>
-  <a href="https://github.com/snek-at/wagtail-template/issues/new?template=bug_report.md">Report bug</a>
+  <a href="https://github.com/tuwien-club/ccms/issues/new?template=bug_report.md">Report bug</a>
   ·
-  <a href="https://github.com/snek-at/wagtail-template/issues/new?template=feature_request.md">Request feature</a>
+  <a href="https://github.com/tuwien-club/ccms/issues/new?template=feature_request.md">Request feature</a>
   ·
   <a href="https://www.overleaf.com/read/bcxwhwbhrmps">Documentation</a>
   <br>
@@ -59,7 +59,7 @@ Several quick start options are available:
 Run the following commands:
 
 ```bash
-git clone https://github.com/snek-at/wagtail-template.git
+git clone https://github.com/tuwien-club/ccms.git
 cd Wagtail-Template
 docker-compose up --build -d
 docker-compose up
@@ -90,7 +90,7 @@ which is the [recommended installation approach](https://docs.python.org/3/libra
 
 With [PIP](https://github.com/pypa/pip) installed, run:
 
-    git clone https://github.com/snek-at/wagtail-template.git
+    git clone https://github.com/tuwien-club/ccms.git
     cd Wagtail-Template
     python --version
     python -m pip --version
@@ -124,20 +124,20 @@ To set up your database and load initial data, run the following commands:
 ## [](#bug-and-feature-requests)Bugs and feature requests
 
 Have a bug or a feature request? Please first search for existing and closed issues. If your problem or idea is not
-addressed yet, [please open a new issue](https://github.com/snek-at/wagtail-template/issues/new/choose).
+addressed yet, [please open a new issue](https://github.com/tuwien-club/ccms/issues/new/choose).
 
 ## [](#contributing)Contributing
 
-![GitHub last commit](https://img.shields.io/github/last-commit/snek-at/wagtail-template)
-![GitHub issues](https://img.shields.io/github/issues-raw/snek-at/wagtail-template)
-![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/snek-at/wagtail-template?color=green)
+![GitHub last commit](https://img.shields.io/github/last-commit/tuwien-club/ccms)
+![GitHub issues](https://img.shields.io/github/issues-raw/tuwien-club/ccms)
+![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/tuwien-club/ccms?color=green)
 
 Please read through our
-[contributing guidelines](https://github.com/snek-at/wagtail-template/blob/master/CONTRIBUTING.md). Included are
+[contributing guidelines](https://github.com/tuwien-club/ccms/blob/master/CONTRIBUTING.md). Included are
 directions for opening issues, coding standards, and notes on development.
 
-All code should conform to the [Code Guide](https://github.com/snek-at/tonic/blob/master/STYLE_GUIDE.md), maintained by
-[SNEK](https://github.com/snek-at).
+All code should conform to the [Code Guide](https://github.com/tuwien-club/tonic/blob/master/STYLE_GUIDE.md), maintained by
+[tuwien-club](https://github.com/tuwien-club).
 
 ## [](#versioning)Versioning
 
@@ -152,17 +152,11 @@ those rules whenever possible.
         <td>
     	    <a href="https://github.com/kleberbaum">
     	        <img src="https://avatars.githubusercontent.com/kleberbaum?s=100" alt="Avatar kleberbaum">
-            </a>
+          </a>
         </td>
-    	<td>
-    	    <a href="https://github.com/schettn">
-                <img src="https://avatars.githubusercontent.com/schettn?s=100" alt="Avatar schettn">
-            </a>
-    	</td>
     </tr>
     <tr>
         <td><a href="https://github.com/kleberbaum">Florian Kleber</a></td>
-        <td><a href="https://github.com/schettn">Nico Schett</a></td>
     </tr>
 </table>
 
@@ -176,4 +170,4 @@ to [contribute to our project](#contributing).
 ![GitHub repository license](https://img.shields.io/badge/license-EUPL--1.2-blue)
 
 SPDX-License-Identifier: (EUPL-1.2)
-Copyright © 2019-2020 Simon Prast
+Copyright © 2021 tuwien-club
