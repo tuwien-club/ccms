@@ -17,8 +17,8 @@
   <a href="https://www.overleaf.com/read/bcxwhwbhrmps">Documentation</a>
   <br>
   <br>
-  <a href="https://www.codacy.com/app/kleberbaum/wagtail-template">
-    <img src="https://api.codacy.com/project/badge/Grade/20d80a1790c44c90a3376e77d34a99ff" />
+  <a href="https://www.codacy.com/gh/tuwien-club/ccms/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tuwien-club/ccms&amp;utm_campaign=Badge_Grade">
+    <img src="https://app.codacy.com/project/badge/Grade/bb3d984d38704860ba7ad800d319b8c4" />
   </a>
 </p>
 
