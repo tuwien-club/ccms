@@ -15,7 +15,6 @@ services:
     app:
         build:
             context: .
-            dockerfile: Docker/Dockerfile
         environment:
             - "DJANGO_SECRET_KEY=changeme"
             - "DATABASE_URL=postgres://app_user:changeme@db/app_db"

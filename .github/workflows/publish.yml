@@ -1,0 +1,127 @@
+name: publish
+
+on: [push]
+env:
+  IMAGE_NAME: ccms
+
+jobs:
+  commit-ccms-changes:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      # If you need to, you can check out your repo to a different location
+      - uses: actions/checkout@v2
+        with:
+          path: '.'
+      - run: ls -ali .
+      - run: echo "Lorem ipsum" > ./ccms.txt
+      - uses: EndBug/add-and-commit@v7 # You can change this to use a specific version
+        with:
+          # The arguments for the `git add` command (see the paragraph below for more info)
+          # Default: '.'
+          add: '.'
+
+          # The name of the user that will be displayed as the author of the commit
+          # Default: depends on the default_author input
+          author_name: Florian Kleber
+
+          # The email of the user that will be displayed as the author of the commit
+          # Default: depends on the default_author input
+          author_email: kleberbaum@erebos.xyz
+
+          # Name of the branch to use, if different from the one that triggered the workflow
+          # Default: the branch that triggered the run
+          branch: ccms
+
+          # The local path to the directory where your repository is located. You should use actions/checkout first to set it up
+          # Default: '.'
+          cwd: '.'
+
+          # Determines the way the action fills missing author name and email. Three options are available:
+          # - github_actor -> UserName <UserName@users.noreply.github.com>
+          # - user_info -> Your Display Name <your-actual@email.com>
+          # - github_actions -> github-actions <email associated with the github logo>
+          # Default:
+          default_author: github_actor
+
+          # The message for the commit
+          # Default: 'Commit from GitHub Actions (name of the workflow)'
+          message: 'CCMS commit via GitHub Actions ()'
+
+          # The flag used on the pull strategy. Use NO-PULL to avoid the action pulling at all.
+          # Default: '--no-rebase'
+          #pull_strategy: 'NO-PULL or --no-rebase or --no-ff or --rebase'
+
+          # Whether to push the commit and, if any, its tags to the repo. It can also be used to set the git push arguments (see the paragraph below for more info)
+          # Default: true
+          #push: false
+
+          # The arguments for the `git rm` command (see the paragraph below for more info)
+          # Default: ''
+          #remove: './dir/old_file.js'
+
+          # Whether to use the --signoff option on `git commit` (only `true` and `false` are accepted)
+          # Default: false
+          #signoff: true
+
+          # Arguments for the git tag command (the tag name always needs to be the first word not preceded by an hyphen)
+          # Default: ''
+          #tag: 'v1.0.0 --force'
+
+
+#name: Demo Push
+#
+#on:   
+#  push:
+#    # Publish `master` as Docker `latest` image.
+#    branches:
+#      - master
+#      - seed
+#
+#    # Publish `v1.2.3` tags as releases.
+#    tags:
+#      - v*
+#
+#  # Run tests for any PRs.
+#  pull_request:
+#
+#env:
+#  IMAGE_NAME: ccms
+
+#jobs:
+  # Push image to GitHub Packages.
+  # See also https://docs.docker.com/docker-hub/builds/
+  publish-ccms-image:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: docker build . --file Dockerfile --tag $IMAGE_NAME
+
+      - name: Log into registry
+        # This is where you will update the PAT to GITHUB_TOKEN
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Push image
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
+
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          # Use Docker `latest` tag convention
+          [ "$VERSION" == "main" ] && VERSION=latest
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
