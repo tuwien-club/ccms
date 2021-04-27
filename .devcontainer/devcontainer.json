@@ -45,9 +45,10 @@
 	"extensions": [
 		"ms-python.python",
 		"mtxr.sqltools",
-		"mtxr.sqltools-driver-pg",
+		"mtxr.sqltools-driver-sqlite",
+		// "mtxr.sqltools-driver-pg",
 		"dracula-theme.theme-dracula",
-		"ms-azuretools.vscode-docker"
+		// "ms-azuretools.vscode-docker"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
