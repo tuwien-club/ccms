@@ -1,22 +1,30 @@
 // Update the VARIANT arg in docker-compose.yml to pick a Python version: 3, 3.8, 3.7, 3.6 
 {
 	"name": "Python 3 & PostgreSQL",
-	"dockerComposeFile": "docker-compose.yml",
+	"dockerComposeFile": "development-compose.yml",
 	"service": "app",
 	"workspaceFolder": "/workspace",
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
 		"terminal.integrated.shell.linux": "/bin/bash",
+		// "sqltools.connections": [{
+		// 	"name": "Container database",
+		// 	"driver": "PostgreSQL",
+		// 	"previewLimit": 50,
+		// 	"server": "localhost",
+		// 	"port": 5432,
+		// 	"database": "postgres",
+		// 	"username": "postgres",
+		// 	"password": "postgres"
+		// }],
+		"sqltools.useNodeRuntime": true,
 		"sqltools.connections": [{
 			"name": "Container database",
-			"driver": "PostgreSQL",
-			"previewLimit": 50,
-			"server": "localhost",
-			"port": 5432,
-			"database": "postgres",
-			"username": "postgres",
-			"password": "postgres"
+			"name": "SQLite",
+			"driver": "SQLite",
+			"database": "./db.sqlite3", // if you use relative paths, the base folder is the currently open folder (or workspace).
+			"connectionTimeout": 15
 		}],
 		"python.pythonPath": "/usr/local/bin/python",
 		"python.linting.enabled": true,
@@ -43,7 +51,7 @@
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [8888],
+	//"forwardPorts": [8888],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "pip install --user -r requirements.txt",

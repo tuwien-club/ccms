@@ -57,7 +57,7 @@ RUN set -ex \
 
 # Add custom environment variables needed by Django or your settings file here:
 ENV DJANGO_DEBUG=on \
-    DJANGO_SETTINGS_MODULE=esite.settings.production
+    DJANGO_SETTINGS_MODULE=esite.settings.development
 
 # The ASGI configuration (customize as needed):
 ENV ASGI_VIRTUALENV=/venv \

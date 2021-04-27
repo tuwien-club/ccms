@@ -76,10 +76,11 @@ services:
       - local
 
     environment:
-      #- "DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}"
+      #- DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DJANGO_SETTINGS_MODULE=esite.settings.production
       - DATABASE_URL=postgres://postgres:postgres@db/postgres
-      #- "DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}"
-      #- "CACHE_URL=redis://redis"
+      #- DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}
+      #- CACHE_URL=redis://redis
       - ELASTICSEARCH_ENDPOINT=elasticsearch
 
     depends_on:
