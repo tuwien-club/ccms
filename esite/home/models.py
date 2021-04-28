@@ -100,11 +100,6 @@ class HomePage(BasePage):
             publisher_options=PublisherOptions(create=True, update=True, read=True, delete=True),
         ),
         GraphQLString(
-            "date",
-            required=True,
-            publisher_options=PublisherOptions(create=True, update=True, read=True),
-        ),
-        GraphQLString(
             "city",
             required=True,
             publisher_options=PublisherOptions(create=True, update=True, read=True),

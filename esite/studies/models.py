@@ -105,11 +105,6 @@ class StudiePageIndex(BasePage):
             "title",
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
-        ),
-        GraphQLString(
-            "date",
-            publisher_options=PublisherOptions(read=True, update=True, create=True),
-            required=True,
-        ),
+        )
     #    GraphQLCollection(GraphQLPage, "get_context.studies", StudiePage)
     ]
