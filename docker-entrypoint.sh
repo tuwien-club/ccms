@@ -14,7 +14,7 @@ echo >&2 "correct ownership of media"
 chown -Rv 1000:2000 /code/media/
 
 # Migrate database for deployment.
-if [ "$1" = "/code/Docker/run_asgi.sh" ]; then
+if [ "$1" = "/code/run_asgi.sh" ]; then
     /venv/bin/python manage.py migrate --noinput
 fi
 

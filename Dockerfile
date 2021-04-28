@@ -70,13 +70,14 @@ ADD . /code/
 
 # Place init, make it executable and
 # make sure venv files can be used by asgi process:
-RUN chmod +x /code/Docker/docker-entrypoint.sh ;\
+RUN chmod +x /code/docker-entrypoint.sh ;\
+    chmod +x /code/run_asgi.sh ;\
     \
     # Call collectstatic with dummy environment variables:
     DATABASE_URL=postgres://none REDIS_URL=none /venv/bin/python manage.py collectstatic --noinput
 
-ENTRYPOINT ["/usr/bin/tini", "--", "/code/Docker/docker-entrypoint.sh"]
-CMD ["/code/Docker/run_asgi.sh"]
+ENTRYPOINT ["/usr/bin/tini", "--", "/code/docker-entrypoint.sh"]
+CMD ["/code/run_asgi.sh"]
 
 # SPDX-License-Identifier: (EUPL-1.2)
 # Copyright © 2021 Nico Schett
