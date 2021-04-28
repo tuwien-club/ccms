@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/stable/ref/settings/
 """
 
 import os
+from datetime import timedelta
 
 env = os.environ.copy()
 
@@ -23,7 +24,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # See https://docs.djangoproject.com/en/stable/ref/settings/#installed-apps
 INSTALLED_APPS = [
     # Our own apps
-    "esite.core",
+    #"esite.core",
     "esite.utils",
     "esite.user",
     "esite.documents",
@@ -58,7 +59,7 @@ INSTALLED_APPS = [
     "wagtail.admin",
     "wagtail.core",
     # Third party apps
-    "bifrost",
+    "wagtailmedia",
     "corsheaders",
     "django_filters",
     "modelcluster",
@@ -66,12 +67,15 @@ INSTALLED_APPS = [
     "captcha",
     "generic_chooser",
     "wagtailcaptcha",
-    "graphene_django",
     "graphql_jwt.refresh_token.apps.RefreshTokenConfig",
-    "channels",
     "wagtailfontawesome",
     "pattern_library",
     "esite.project_styleguide.apps.ProjectStyleguideConfig",
+    # BIFROST SPECIFIC MODULES
+    "bifrost",
+    "graphene_django",
+    "channels",
+    "wagtail_headless_preview",
 ]
 
 # > Middleware Definition
@@ -145,28 +149,18 @@ DATABASES = {
 
 # > Graphene Configuration
 GRAPHENE = {
-    "SCHEMA": "bifrost.schema.schema",
+    "SCHEMA": "bifrost.api.schema.schema",
+    "MIDDLEWARE": ["graphql_jwt.middleware.JSONWebTokenMiddleware"],
 }
-
-BIFROST_APPS = {
-    "home": "",
-    "utils": "",
-    "documents": "",
-    "images": "",
-    "user": "",
-    "navigation": "",
-    "utils": "",
+GRAPHQL_JWT = {
+    "JWT_ALLOW_ARGUMENT": True,
+    "JWT_VERIFY_EXPIRATION": True,
+    "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
+    "JWT_EXPIRATION_DELTA": timedelta(minutes=5),
+    "JWT_REFRESH_EXPIRATION_DELTA": timedelta(days=7),
 }
-
-BIFROST_ADD_SEARCH_HIT = True
 
 ASGI_APPLICATION = "bifrost.asgi.application"
-
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",
-    },
-}
 
 # > Password Validation
 # The list of validators that are used to check the strength of passwords, see
@@ -307,5 +301,33 @@ SILENCED_SYSTEM_CHECKS = ["captcha.recaptcha_test_key_error"]
 # Ref:https://docs.wagtail.io/en/stable/advanced_topics/settings.html#unicode-page-slugs
 WAGTAIL_ALLOW_UNICODE_SLUGS = True
 
+# > Bifrost settings
+BIFROST_APPS = {
+    "home": "",
+    "utils": "",
+    "documents": "",
+    "images": "",
+    "user": "",
+    "navigation": "",
+    "utils": "",
+}
+
+BIFROST_FILES = False
+
+BIFROST_ADD_SEARCH_HIT = True
+
+HEADLESS_PREVIEW_CLIENT_URLS = {"default": "http://localhost:8001/preview"}
+HEADLESS_PREVIEW_LIVE = True
+
+ASGI_APPLICATION = "bifrost.asgi.application"
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {"hosts": [("localhost", 6379)]},
+    }
+}
+# Private file storage
+PRIVATE_STORAGE_ROOT = "private_media/"
+
 # SPDX-License-Identifier: (EUPL-1.2)
-# Copyright © 2019-2020 Simon Prast
+# Copyright © 2019-2021 Nico Schett
