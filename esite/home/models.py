@@ -189,10 +189,14 @@ class HomePage(BasePage):
             required=True,
             publisher_options=PublisherOptions(create=True, update=True, read=True),
         ),
-        GraphQLStreamfield("body"),
+        GraphQLStreamfield(
+            "body",
+            required=True,
+            publisher_options=PublisherOptions(create=True, update=True, read=True),
+        ),
     ]
 
-    content_panels = BasePage.content_panels+ [
+    content_panels = BasePage.content_panels + [
         StreamFieldPanel("body"),
     ]
 

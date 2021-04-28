@@ -54,6 +54,6 @@ class StreamFieldBlock(blocks.StreamBlock):
     groups = blocks.ListBlock(blocks.RichTextBlock())
 
     graphql_fields = [
-        GraphQLCollection(GraphQLString, "message",),
+        GraphQLString("message"),
         GraphQLCollection(GraphQLString, "groups", blocks.RichTextBlock())
     ]
