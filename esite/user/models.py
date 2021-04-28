@@ -1,5 +1,5 @@
 import django.contrib.auth.validators
-from bifrost.models import GraphQLBoolean, GraphqlDatetime, GraphQLString
+from bifrost.api.models import GraphQLBoolean, GraphqlDatetime, GraphQLString
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from modelcluster.models import ClusterableModel

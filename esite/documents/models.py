@@ -1,4 +1,4 @@
-from bifrost.models import GraphQLString
+from bifrost.api.models import GraphQLString
 from django.db import models
 from wagtail.documents.models import AbstractDocument
 from wagtail.documents.models import Document as WagtailDocument

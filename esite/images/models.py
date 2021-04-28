@@ -1,4 +1,4 @@
-from bifrost.models import GraphQLBoolean, GraphQLSnippet, GraphQLString
+from bifrost.api.models import GraphQLBoolean, GraphQLSnippet, GraphQLString
 from django.db import models
 from wagtail.images.models import AbstractImage, AbstractRendition, Image
 

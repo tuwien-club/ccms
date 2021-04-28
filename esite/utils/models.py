@@ -1,4 +1,4 @@
-from bifrost.models import GraphQLPage, GraphQLString
+from bifrost.api.models import GraphQLPage, GraphQLString
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.decorators import method_decorator
@@ -9,6 +9,9 @@ from wagtail.core.fields import RichTextField
 from wagtail.core.models import Orderable, Page
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
+
+from bifrost.publisher.actions import register_publisher
+from bifrost.publisher.options import PublisherOptions
 
 from esite.utils.cache import get_default_cache_control_decorator
 
@@ -175,6 +178,7 @@ class ListingFields(models.Model):
 
 
 @register_setting
+@register_publisher(read_singular=True)
 class SocialMediaSettings(BaseSetting):
     twitter_handle = models.CharField(
         max_length=255,
@@ -196,6 +200,12 @@ class SocialMediaSettings(BaseSetting):
         help_text="Site name, used by Open Graph.",
     )
 
+    graphql_fields = [
+        GraphQLString("twitter_handle"),
+        GraphQLString("facebook_app_id"),
+        GraphQLString("default_sharing_text"),
+        GraphQLString("site_name"),
+    ]
 
 @register_setting
 class SystemMessagesSettings(BaseSetting):
