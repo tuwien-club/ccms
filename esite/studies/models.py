@@ -63,9 +63,6 @@ class StudiePage(BasePage):
 
 @register_publisher(
     read_singular=True,
-    create=True,
-    update=True,
-    delete=True,
     read_singular_permission=login_required,
 )
 class StudiePageIndex(BasePage):
@@ -99,5 +96,20 @@ class StudiePageIndex(BasePage):
         return context
 
     graphql_fields = [
-        GraphQLCollection(GraphQLPage, "get_context.studies", StudiePage)
+        GraphQLString(
+            "slug",
+            publisher_options=PublisherOptions(read=True, update=True, create=True),
+            required=True,
+        ),
+        GraphQLString(
+            "title",
+            publisher_options=PublisherOptions(read=True, update=True, create=True),
+            required=True,
+        ),
+        GraphQLString(
+            "date",
+            publisher_options=PublisherOptions(read=True, update=True, create=True),
+            required=True,
+        ),
+    #    GraphQLCollection(GraphQLPage, "get_context.studies", StudiePage)
     ]
