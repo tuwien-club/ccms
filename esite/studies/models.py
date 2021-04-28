@@ -50,11 +50,6 @@ class StudiePage(BasePage):
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
         ),
-        GraphQLString(
-            "date",
-            publisher_options=PublisherOptions(read=True, update=True, create=True),
-            required=True,
-        ),
         GraphQLStreamfield("body",
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
