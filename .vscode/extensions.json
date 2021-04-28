@@ -17,6 +17,5 @@
         "oderwat.indent-rainbow",
         "ms-python.python",
         "eamodio.gitlens",
-        //"ms-azuretools.vscode-docker"
     ]
 }

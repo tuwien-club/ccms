@@ -1,6 +1,6 @@
 // Update the VARIANT arg in docker-compose.yml to pick a Python version: 3, 3.8, 3.7, 3.6 
 {
-	"name": "Python 3 & PostgreSQL",
+	"name": "Python 3",
 	"dockerComposeFile": "development-compose.yml",
 	"service": "app",
 	"workspaceFolder": "/workspace",
@@ -18,14 +18,14 @@
 		// 	"username": "postgres",
 		// 	"password": "postgres"
 		// }],
-		"sqltools.useNodeRuntime": true,
-		"sqltools.connections": [{
-			"name": "Container database",
-			"name": "SQLite",
-			"driver": "SQLite",
-			"database": "./db.sqlite3", // if you use relative paths, the base folder is the currently open folder (or workspace).
-			"connectionTimeout": 15
-		}],
+		// "sqltools.useNodeRuntime": true,
+		// "sqltools.connections": [{
+		//	"name": "Container database",
+		//	"name": "SQLite",
+		//	"driver": "SQLite",
+		//	"database": "./db.sqlite3", // if you use relative paths, the base folder is the currently open folder (or workspace).
+		//	"connectionTimeout": 15
+		//}],
 		"python.pythonPath": "/usr/local/bin/python",
 		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": true,
@@ -44,11 +44,11 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-python.python",
-		"mtxr.sqltools",
-		"mtxr.sqltools-driver-sqlite",
-		// "mtxr.sqltools-driver-pg",
+		//"mtxr.sqltools",
+		//"mtxr.sqltools-driver-sqlite",
+		//"mtxr.sqltools-driver-pg",
 		"dracula-theme.theme-dracula",
-		// "ms-azuretools.vscode-docker"
+		//"ms-azuretools.vscode-docker"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

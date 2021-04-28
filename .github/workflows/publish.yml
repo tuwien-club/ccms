@@ -33,7 +33,7 @@ jobs:
 
           # Name of the branch to use, if different from the one that triggered the workflow
           # Default: the branch that triggered the run
-          branch: ccms
+          branch: storage
 
           # The local path to the directory where your repository is located. You should use actions/checkout first to set it up
           # Default: '.'
@@ -70,27 +70,6 @@ jobs:
           # Default: ''
           #tag: 'v1.0.0 --force'
 
-
-#name: Demo Push
-#
-#on:   
-#  push:
-#    # Publish `master` as Docker `latest` image.
-#    branches:
-#      - master
-#      - seed
-#
-#    # Publish `v1.2.3` tags as releases.
-#    tags:
-#      - v*
-#
-#  # Run tests for any PRs.
-#  pull_request:
-#
-#env:
-#  IMAGE_NAME: ccms
-
-#jobs:
   # Push image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
   publish-ccms-image:
