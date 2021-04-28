@@ -1,4 +1,28 @@
 from django.db import models
+from bifrost.decorators import login_required
+from modelcluster.fields import ParentalKey
+from wagtail.core import blocks
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
+from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.core.fields import RichTextField, StreamField
+from wagtail.core.models import Orderable, Page
+from wagtail.documents.edit_handlers import DocumentChooserPanel
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
+from wagtail.snippets.models import register_snippet
+from wagtail_headless_preview.models import HeadlessPreviewMixin
+from wagtailmedia.edit_handlers import MediaChooserPanel
+from bifrost.api.models import (
+    GraphQLCollection,
+    GraphQLDocument,
+    GraphQLForeignKey,
+    GraphQLImage,
+    GraphQLMedia,
+    GraphQLPage,
+    GraphQLSnippet,
+    GraphQLStreamfield,
+    GraphQLString,
+)
 from wagtail.admin.edit_handlers import (
     FieldPanel,
     MultiFieldPanel,
@@ -7,46 +31,20 @@ from wagtail.admin.edit_handlers import (
     StreamFieldPanel,
     TabbedInterface,
 )
-from wagtail.core import blocks
-from wagtail.core.fields import RichTextField, StreamField
-from wagtail.core.models import Page
-from wagtail.images.edit_handlers import ImageChooserPanel
+from bifrost.publisher.actions import register_publisher
+from bifrost.publisher.options import PublisherOptions
 
 from esite.utils.models import BasePage
+from .blocks import StreamFieldBlock
 
-# Create your homepage related models here.
-
-# class HomePageFeaturedPage(Orderable):
-#     page = ParentalKey(
-#         'home.HomePage',
-#         related_name='featured_pages'
-#     )
-#     featured_page = models.ForeignKey(
-#         'person.PersonPage',
-#         related_name='+',
-#         on_delete=models.CASCADE,
-#         verbose_name='featured page',
-#     )
-#     title = models.CharField(null=True, blank=True, max_length=80)
-#     summary = models.TextField(null=True, blank=True, max_length=200)
-#     image = models.ForeignKey(
-#         'images.SNEKImage',
-#         null=True,
-#         blank=True,
-#         related_name='+',
-#         on_delete=models.SET_NULL,
-#     )
-
-#     panels = [
-#         PageChooserPanel('featured_page'),
-#         FieldPanel('title'),
-#         FieldPanel('summary'),
-#         ImageChooserPanel('image')
-#     ]
-
-# > Homepage
+@register_publisher(
+    read_singular=True,
+    create=True,
+    update=True,
+    delete=True,
+    read_singular_permission=login_required,
+)
 class HomePage(BasePage):
-
     template = "patterns/pages/home/home_page.html"
 
     # Only allow creating HomePages at the root level
@@ -88,139 +86,114 @@ class HomePage(BasePage):
         ]
     )
 
-    array = []
-
-    def sociallink_company(self):
-        for link in self.sociallinks:
-            self.array.append(str(link).split(".")[1])
-        return self.array
-
-    # headers = StreamField(
-    #     [
-    #         (
-    #             "code",
-    #             blocks.RawHTMLBlock(
-    #                 null=True, blank=True, classname="full", icon="code"
-    #             ),
-    #         )
-    #     ],
-    #     null=True,
-    #     blank=False,
-    # )
-
-    # sections = StreamField(
-    #     [
-    #         (
-    #             "code",
-    #             blocks.RawHTMLBlock(
-    #                 null=True, blank=True, classname="full", icon="code"
-    #             ),
-    #         )
-    #     ],
-    #     null=True,
-    #     blank=False,
-    # )
-
-    # token = models.CharField(null=True, blank=True, max_length=255)
-
-    hero_title = models.CharField(null=True, blank=False, max_length=80)
-
-    hero_introduction = models.CharField(null=True, blank=False, max_length=255)
-
-    hero_button_text = models.CharField(null=True, blank=True, max_length=55)
-
-    hero_button_link = models.ForeignKey(
-        "wagtailcore.Page",
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        related_name="+",
-    )
-
-    featured_image = models.ForeignKey(
-        "images.SNEKImage",
-        null=True,
-        blank=False,
-        related_name="+",
-        on_delete=models.SET_NULL,
-    )
-
-    # search_fields = BasePage.search_fields + [
-    #     index.SearchField('hero_introduction'),
-    # ]
-
-    articles_title = models.CharField(null=True, blank=True, max_length=150)
-    articles_link = models.ForeignKey(
-        "wagtailcore.Page",
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        related_name="+",
-    )
-    articles_linktext = models.CharField(null=True, blank=True, max_length=80)
-
-    featured_pages_title = models.CharField(null=True, blank=True, max_length=150)
-    pages_link = models.ForeignKey(
-        "wagtailcore.Page",
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        related_name="+",
-    )
-    pages_linktext = models.CharField(null=True, blank=True, max_length=80)
-
-    news_title = models.CharField(null=True, blank=True, max_length=150)
-    news_link = models.ForeignKey(
-        "wagtailcore.Page",
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        related_name="+",
-    )
-    news_linktext = models.CharField(null=True, blank=True, max_length=80)
-
-    def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
-        context["articles_title"] = self.articles_title
-        context["articles_link"] = self.articles_link
-        context["articles_linktext"] = self.articles_linktext
-        context["featured_pages_title"] = self.featured_pages_title
-        context["pages_link"] = self.pages_link
-        context["pages_linktext"] = self.pages_linktext
-        context["news_title"] = self.news_title
-        context["news_link"] = self.news_link
-        context["news_linktext"] = self.news_linktext
-
-        return context
-
-    content_panels = BasePage.content_panels + [
-        MultiFieldPanel(
-            [
-                FieldPanel("hero_title"),
-                FieldPanel("hero_introduction"),
-                FieldPanel("hero_button_text"),
-                PageChooserPanel("hero_button_link"),
-                ImageChooserPanel("featured_image"),
-            ],
-            heading="Hero Section",
+    body = StreamField(StreamFieldBlock())
+    
+    graphql_fields = [
+        GraphQLString(
+            "slug",
+            required=True,
+            publisher_options=PublisherOptions(create=True, update=True, read=True),
         ),
-        # InlinePanel(
-        #     'featured_pages',
-        #     label="Featured Pages",
-        #     max_num=6,
-        #     heading='Featured Pages, Maximum 6'
-        # ),
-        MultiFieldPanel(
-            [
-                FieldPanel("articles_title"),
-                PageChooserPanel("articles_link"),
-                FieldPanel("featured_pages_title"),
-                PageChooserPanel("pages_link"),
-                FieldPanel("news_title"),
-                PageChooserPanel("news_link"),
-            ],
-            heading="Front page sections",
+        GraphQLString(
+            "title",
+            required=True,
+            publisher_options=PublisherOptions(create=True, update=True, read=True, delete=True),
         ),
+        GraphQLString(
+            "date",
+            required=True,
+            publisher_options=PublisherOptions(create=True, update=True, read=True),
+        ),
+        GraphQLString(
+            "city",
+            required=True,
+            publisher_options=PublisherOptions(create=True, update=True, read=True),
+        ),
+        GraphQLString(
+            "zip_code",
+            required=True,
+            publisher_options=PublisherOptions(create=True, update=True, read=True),
+        ),
+        GraphQLString(
+            "address",
+            required=True,
+            publisher_options=PublisherOptions(create=True, update=True, read=True),
+        ),
+        GraphQLString(
+            "telephone",
+            required=True,
+            publisher_options=PublisherOptions(create=True, update=True, read=True),
+        ),
+        GraphQLString(
+            "telefax",
+            required=True,
+            publisher_options=PublisherOptions(create=True, update=True, read=True),
+        ),
+        GraphQLString(
+            "vat_number",
+            required=True,
+            publisher_options=PublisherOptions(create=True, update=True, read=True),
+        ),
+        GraphQLString(
+            "whatsapp_telephone",
+            required=True,
+            publisher_options=PublisherOptions(create=True, update=True, read=True),
+        ),
+        GraphQLString(
+            "whatsapp_contactline",
+            required=True,
+            publisher_options=PublisherOptions(create=True, update=True, read=True),
+        ),
+        GraphQLString(
+            "tax_id",
+            required=True,
+            publisher_options=PublisherOptions(create=True, update=True, read=True),
+        ),
+        GraphQLString(
+            "trade_register_number",
+            required=True,
+            publisher_options=PublisherOptions(create=True, update=True, read=True),
+        ),
+        GraphQLString(
+            "court_of_registry",
+            required=True,
+            publisher_options=PublisherOptions(create=True, update=True, read=True),
+        ),
+        GraphQLString(
+            "place_of_registry",
+            required=True,
+            publisher_options=PublisherOptions(create=True, update=True, read=True),
+        ),
+        GraphQLString(
+            "ownership",
+            required=True,
+            publisher_options=PublisherOptions(create=True, update=True, read=True),
+        ),
+        GraphQLString(
+            "email",
+            required=True,
+            publisher_options=PublisherOptions(create=True, update=True, read=True),
+        ),
+        GraphQLString(
+            "copyrightholder",
+            required=True,
+            publisher_options=PublisherOptions(create=True, update=True, read=True),
+        ),
+        GraphQLString(
+            "about",
+            required=True,
+            publisher_options=PublisherOptions(create=True, update=True, read=True),
+        ),
+        GraphQLString(
+            "privacy",
+            required=True,
+            publisher_options=PublisherOptions(create=True, update=True, read=True),
+        ),
+        GraphQLStreamfield("body"),
+    ]
+
+    content_panels = BasePage.content_panels+ [
+        StreamFieldPanel("body"),
     ]
 
     imprint_panels = [
@@ -258,7 +231,7 @@ class HomePage(BasePage):
 
     edit_handler = TabbedInterface(
         [
-            ObjectList(Page.content_panels + content_panels, heading="Content"),
+            ObjectList(content_panels, heading="Content"),
             ObjectList(imprint_panels, heading="Imprint"),
             ObjectList(
                 BasePage.promote_panels + BasePage.settings_panels,
