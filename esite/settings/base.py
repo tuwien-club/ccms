@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     # Our own pages
     "esite.colorfield",
     "esite.home",
+    "esite.groups",
     # Django core apps
     "django.contrib.admin",
     "django.contrib.auth",
@@ -304,6 +305,7 @@ WAGTAIL_ALLOW_UNICODE_SLUGS = True
 # > Bifrost settings
 BIFROST_APPS = {
     "home": "",
+    "groups": "",
     "utils": "",
     "documents": "",
     "images": "",
