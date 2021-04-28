@@ -33,12 +33,8 @@ from .blocks import StreamFieldBlock
 
 @register_publisher(
     read_singular=True,
-    create=True,
-    update=True,
-    delete=True,
-    read_singular_permission=login_required,
 )
-class GroupPage(BasePage):
+class StudiePage(BasePage):
     body = StreamField(StreamFieldBlock())
 
     content_panels = BasePage.content_panels + [StreamFieldPanel("body")]
@@ -60,7 +56,48 @@ class GroupPage(BasePage):
             required=True,
         ),
         GraphQLStreamfield("body",
-            #publisher_options=PublisherOptions(read=True, update=True, create=True),
-            #required=True,
+            publisher_options=PublisherOptions(read=True, update=True, create=True),
+            required=True,
         ),
+    ]
+
+@register_publisher(
+    read_singular=True,
+    create=True,
+    update=True,
+    delete=True,
+    read_singular_permission=login_required,
+)
+class StudiePageIndex(BasePage):
+    template = "patterns/pages/people/person_index_page.html"
+
+    # Only allow creating HomePages at the root level
+    #parent_page_types = ["home.HomePage"]
+    parent_page_types = ["wagtailcore.Page"]
+    subpage_types = ["StudiePage"]
+
+    class Meta:
+        verbose_name = "StudiePage Index"
+
+    def get_context(self, request, *args, **kwargs):
+        studies = (
+            StudiePage.objects.live().public().descendant_of(self).order_by("slug")
+        )
+
+        page_number = request.GET.get("page", 1)
+        paginator = Paginator(studies, settings.DEFAULT_PER_PAGE)
+        try:
+            studies = paginator.page(page_number)
+        except PageNotAnInteger:
+            studies = paginator.page(1)
+        except EmptyPage:
+            studies = paginator.page(paginator.num_pages)
+
+        context = super().get_context(request, *args, **kwargs)
+        context.update(studies=studies)
+
+        return context
+
+    graphql_fields = [
+        GraphQLCollection(GraphQLPage, "get_context.studies", StudiePage)
     ]

@@ -3,7 +3,7 @@ from django.apps import AppConfig
 
 # This defines the name of the app.
 class GroupsConfig(AppConfig):
-    name = "groups"
+    name = "studies"
 
 
 # SPDX-License-Identifier: (EUPL-1.2)
