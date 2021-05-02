@@ -35,9 +35,10 @@ from .blocks import StreamFieldBlock
     read_singular=True,
 )
 class StudiePage(BasePage):
+    very_cool_test_field = models.CharField(null=True, blank=False, max_length=255)
     body = StreamField(StreamFieldBlock())
 
-    content_panels = BasePage.content_panels + [StreamFieldPanel("body")]
+    content_panels = BasePage.content_panels + [FieldPanel("very_cool_test_field"), StreamFieldPanel("body")]
 
     graphql_fields = [
         GraphQLString(
@@ -47,6 +48,11 @@ class StudiePage(BasePage):
         ),
         GraphQLString(
             "title",
+            publisher_options=PublisherOptions(read=True, update=True, create=True),
+            required=True,
+        ),
+         GraphQLString(
+            "very_cool_test_field",
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
         ),
