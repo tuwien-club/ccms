@@ -1,7 +1,7 @@
 Django>=3.1.0,<3.2.0
 wagtail>=2.11.0,<2.12.0
 # wagtail-bifrost>=3.0.0
-git+https://github.com/schettnet/wagtail-bifrost.git@cfd944a741fc310ba8037030e339ddde7f2234e7
+git+https://github.com/schettnet/wagtail-bifrost.git@8f5faa5ce62b3275753ca59cff22eefefcd78674
 psycopg2-binary<2.9.0
 wagtail-django-recaptcha==1.0
 django-pattern-library==0.3.0
