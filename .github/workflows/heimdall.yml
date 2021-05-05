@@ -15,7 +15,7 @@ jobs:
       - uses: nick-invision/private-action-loader@v3
         with:
           pal-repo-token: ${{ secrets.CR_PAT }}
-          pal-repo-name: snek-shipyard/heimdall-action@25a3c56
+          pal-repo-name: snek-shipyard/heimdall-action@6f5a5d3cdd988ec13b8bb694ed27d58a0d8bc7bb
           # the following input gets passed to the private action
           structure-url: 'https://ccms.snek.at/graphql/'
           data-url: 'https://ccms.snek.at/graphql/'
