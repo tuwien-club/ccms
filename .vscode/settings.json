@@ -42,5 +42,6 @@
         "precached",
         "renamer",
         "webfonts"
-    ]
+    ],
+    "python.pythonPath": "linux-venv/bin/python3"
 }

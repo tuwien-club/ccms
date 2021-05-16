@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "esite.images",
     "esite.navigation",
     "esite.search",
+    "esite.club_bot",
     # Our own pages
     "esite.colorfield",
     "esite.home",

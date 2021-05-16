@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/stable/howto/deployment/checklist/
 """
 
 from .base import *  # noqa
+from .local import *
 
 # > Debug Switch
 # SECURITY WARNING: don't run with debug turned on in production!
