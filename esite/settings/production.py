@@ -283,5 +283,11 @@ if "RECAPTCHA_PUBLIC_KEY" in env and "RECAPTCHA_PRIVATE_KEY" in env:
     RECAPTCHA_PUBLIC_KEY = env["RECAPTCHA_PUBLIC_KEY"]
     RECAPTCHA_PRIVATE_KEY = env["RECAPTCHA_PRIVATE_KEY"]
 
+#> Telegram backend
+# The backend to use for sending telegrams.
+TELEGRAM_API_ID = os.getenv('TELEGRAM_API_ID', '')
+TELEGRAM_API_HASH = os.getenv('TELEGRAM_API_HASH', '')
+TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN', '')
+
 # SPDX-License-Identifier: (EUPL-1.2)
 # Copyright © 2019-2020 Simon Prast
