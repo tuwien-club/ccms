@@ -2,8 +2,8 @@ from django.apps import AppConfig
 
 
 # This defines the name of the app.
-class StudiesConfig(AppConfig):
-    name = "studies"
+class TelegramChatsConfig(AppConfig):
+    name = "telegramchats"
 
 
 # SPDX-License-Identifier: (EUPL-1.2)

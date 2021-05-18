@@ -30,6 +30,8 @@ from wagtail.utils.urlpatterns import decorate_urlpatterns
 from esite.utils.cache import get_default_cache_control_decorator
 from esite.utils.views import favicon, robots
 
+from esite.club_bot.views import activate_club_member
+
 # from esite.search import views as search_views
 
 
@@ -39,6 +41,7 @@ private_urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
+    path('activate/<token>', activate_club_member, name='activate'), 
     # Search cache-control headers are set on the view itself.
     # path('search/', search_views.search, name='search'),
 ]

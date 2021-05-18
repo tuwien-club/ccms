@@ -1,3 +1,5 @@
+import hashlib
+
 from django.apps import AppConfig
 from django.db.models.signals import post_migrate
 
@@ -22,8 +24,48 @@ def create_user(username, password, groups=[], **kwargs):
     [user.groups.add(Group.objects.get(name=group)) for group in groups]
 
 
-def define_groups(sender, **kwargs):
-    create_group("system")
+def define_club_groups(sender, **kwargs):
+    from django.contrib.auth import get_user_model
+    from django.contrib.auth.models import Permission
+    from django.contrib.contenttypes.models import ContentType
+
+    User = get_user_model()
+
+    user_ct = ContentType.objects.get_for_model(User)
+    supervisor_permissions = [
+        # User permissions
+        Permission.objects.get_or_create(
+            codename="can_add_members",
+            name="Can add club members",
+            content_type=user_ct,
+        )[0],
+        Permission.objects.get_or_create(
+            codename="can_delete_members",
+            name="Can delete club members",
+            content_type=user_ct,
+        )[0],
+        Permission.objects.get_or_create(
+            codename="can_update_members",
+            name="Can update club members",
+            content_type=user_ct,
+        )[0],
+        Permission.objects.get_or_create(
+            codename="can_view_members",
+            name="Can view club members",
+            content_type=user_ct,
+        )[0],
+    ]
+    member_permissions = [
+        # Project permissions
+        Permission.objects.get_or_create(
+            codename="can_view_members",
+            name="Can view club members",
+            content_type=user_ct,
+        )[0],
+    ]
+
+    create_group("club-supervisor", supervisor_permissions)
+    create_group("club-member", member_permissions)
 
 
 def define_users(sender, **kwargs):
@@ -32,20 +74,14 @@ def define_users(sender, **kwargs):
     User = get_user_model()
 
     if not User.objects.exists():
-        create_user(
-            username="admin",
-            password="ciscocisco",
-            is_superuser=True,
-            groups=["system"],
-        )
-        create_user(username="cisco", password="ciscocisco", groups=["system"])
-
+        create_user(username="admin", password="ciscocisco", is_superuser=True)
+        create_user(username="cisco", password="ciscocisco")
 
 class UsersConfig(AppConfig):
     name = "esite.user"
 
     def ready(self):
-        post_migrate.connect(define_groups, sender=self)
+        post_migrate.connect(define_club_groups, sender=self)
         post_migrate.connect(define_users, sender=self)
 
         # if you have other signals e.g. post_save, you can include it
@@ -54,4 +90,4 @@ class UsersConfig(AppConfig):
 
 
 # SPDX-License-Identifier: (EUPL-1.2)
-# Copyright © 2021 Nico Schett
+# Copyright © 2019-2020 Simon Prast

@@ -32,6 +32,8 @@ INSTALLED_APPS = [
     "esite.navigation",
     "esite.search",
     "esite.club_bot",
+    "esite.members",
+    "esite.telegramchats",
     # Our own pages
     "esite.colorfield",
     "esite.home",
@@ -313,6 +315,8 @@ BIFROST_APPS = {
     "user": "",
     "navigation": "",
     "utils": "",
+    "club_bot": "",
+    "members": "",
 }
 
 BIFROST_FILES = False

@@ -1,7 +1,9 @@
 from django.db import models
+from django.conf import settings
 from bifrost.decorators import login_required
 from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Orderable, Page
@@ -25,20 +27,63 @@ from bifrost.api.models import (
 from bifrost.publisher.actions import register_publisher
 from bifrost.publisher.options import PublisherOptions
 
-from esite.utils.models import BasePage
+from esite.utils.models import BasePage, TimeStampMixin
 from .blocks import StreamFieldBlock
-
-
 
 
 @register_publisher(
     read_singular=True,
 )
-class StudiePage(BasePage):
-    very_cool_test_field = models.CharField(null=True, blank=False, max_length=255)
+class Study(TimeStampMixin):
+    STUDY_TYPES = (
+        ("BACHELOR", "Bachelor"),
+        ("MASTER", "Master"),
+    )
+
+    studytype = models.CharField(
+        null=True, blank=False, choices=STUDY_TYPES, max_length=255
+    )
+    
+    studyname = models.CharField(
+        null=True, blank=False, max_length=255
+    )
+
+    graphql_fields = [
+        GraphQLString(
+            "study_type",
+            publisher_options=PublisherOptions(read=True, update=True, create=True),
+            required=True,
+        ),
+        GraphQLString(
+            "study_name",
+            publisher_options=PublisherOptions(read=True, update=True, create=True),
+            required=True,
+        ),
+    ]
+
+    def __str__(self):
+        return self.studyname
+
+
+@register_publisher(
+    read_singular=True,
+)
+class StudyPage(BasePage):
+    parent_page_types = ["studies.StudyIndex"]
+    subpage_types = []
+
+    show_in_menus_default = False
+
+    class Meta:
+        verbose_name = "Person Page"
+
+    study = models.OneToOneField(
+        "studies.Study", null=True, on_delete=models.SET_NULL, related_name="study_page"
+    )
+
     body = StreamField(StreamFieldBlock())
 
-    content_panels = BasePage.content_panels + [FieldPanel("very_cool_test_field"), StreamFieldPanel("body")]
+    content_panels = BasePage.content_panels + [StreamFieldPanel("body")]
 
     graphql_fields = [
         GraphQLString(
@@ -48,11 +93,6 @@ class StudiePage(BasePage):
         ),
         GraphQLString(
             "title",
-            publisher_options=PublisherOptions(read=True, update=True, create=True),
-            required=True,
-        ),
-         GraphQLString(
-            "very_cool_test_field",
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
         ),
@@ -66,20 +106,20 @@ class StudiePage(BasePage):
     read_singular=True,
     read_singular_permission=login_required,
 )
-class StudiePageIndex(BasePage):
+class StudyIndex(BasePage):
     template = "patterns/pages/people/person_index_page.html"
 
     # Only allow creating HomePages at the root level
     #parent_page_types = ["home.HomePage"]
     parent_page_types = ["wagtailcore.Page"]
-    subpage_types = ["StudiePage"]
+    subpage_types = ["StudyPage"]
 
     class Meta:
-        verbose_name = "StudiePage Index"
+        verbose_name = "Study Index"
 
     def get_context(self, request, *args, **kwargs):
         studies = (
-            StudiePage.objects.live().public().descendant_of(self).order_by("slug")
+            StudyPage.objects.live().public().descendant_of(self).order_by("slug")
         )
 
         page_number = request.GET.get("page", 1)
@@ -107,5 +147,5 @@ class StudiePageIndex(BasePage):
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
         )
-    #    GraphQLCollection(GraphQLPage, "get_context.studies", StudiePage)
+    #    GraphQLCollection(GraphQLPage, "get_context.studies", StudyPage)
     ]
