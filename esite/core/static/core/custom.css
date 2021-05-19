@@ -1,5 +1,5 @@
 header {
-    background: #df00ff; /* 4c7fa7 */
+    background: #006699; /* 4c7fa7 */
 }
 
 .wagtail-logo-container__desktop {
@@ -13,25 +13,25 @@ header {
 }
 
 a {
-    color: #df00ff;
+    color: #006699;
 }
 
 a:hover {
-    color: #b200cc; /* 2a3c4a */
+    color: #054c70; /* 2a3c4a */
 }
 
 .button {
-    background-color: #df00ff;
-    border: 1px solid #df00ff;
+    background-color: #006699;
+    border: 1px solid #006699;
 }
 
 .button:hover {
-    background-color: #b200cc;
+    background-color: #054c70;
     border-color: transparent;
 }
 
 .button-secondary {
-    color: #df00ff;
+    color: #006699;
     background-color: transparent;
 }
 
@@ -44,36 +44,36 @@ a:hover {
 }
 
 input[type="submit"] {
-    background-color: #df00ff;
-    border-color: #df00ff;
+    background-color: #006699;
+    border-color: #006699;
 }
 
 input[type="submit"]:hover {
-    background-color: #b200cc;
+    background-color: #054c70;
     border-color: transparent;
     color: #ffffff;
 }
 
 .dropdown .dropdown-toggle {
-    background-color: #b200cc !important;
+    background-color: #054c70 !important;
 }
 
 .dropdown .dropdown-toggle:hover,
 .dropdown.open .dropdown-toggle {
-    background-color: #9c00b3 !important;
+    background-color: #053c57 !important;
 }
 
 header .button {
-    background-color: #b200cc !important;
+    background-color: #054c70 !important;
 }
 
 header .button:hover {
-    background-color: #9c00b3 !important; /* 36223f */
+    background-color: #053c57 !important; /* 36223f */
 }
 
 .tab-nav a {
-    background-color: #b200cc;
-    border-top: 0.3em solid #b200cc;
+    background-color: #054c70;
+    border-top: 0.3em solid #054c70;
 }
 
 .tab-nav a:hover {
@@ -81,7 +81,7 @@ header .button:hover {
 }
 
 .tab-nav.merged {
-    background-color: #df00ff;
+    background-color: #006699;
 }
 
 .nav-main .menu-item a:after {
@@ -111,79 +111,79 @@ header .button:hover {
 }
 
 .breadcrumb li:hover {
-    background: #9c00b3;
+    background: #053c57;
 }
 
 @media screen and (min-width: 50em) {
     .breadcrumb {
-        background-color: #b200cc;
+        background-color: #054c70;
     }
 }
 
 .progress .bar {
-    background-color: #df00ff;
+    background-color: #006699;
 }
 
 .progress {
-    background-color: #9c00b3;
-    border: 1px solid #df00ff;
+    background-color: #053c57;
+    border: 1px solid #006699;
 }
 
 .loading-mask.loading:after {
-    color: #df00ff;
+    color: #006699;
 }
 
 .listing.chooser tbody tr:hover {
-    background-color: #df00ff;
+    background-color: #006699;
 }
 
 input[type="radio"]:checked:before {
-    color: #df00ff;
+    color: #006699;
 }
 
 input[type="checkbox"]:checked:before {
-    color: #df00ff;
+    color: #006699;
 }
 
 .c-sf-add-button {
-    color: #df00ff !important;
+    color: #006699 !important;
 }
 
 .page-explorer .listing .index {
-    background-color: #df00ff;
+    background-color: #006699;
 }
 
 .page-explorer .listing .index .button.bicolor {
-    background-color: #df00ff;
+    background-color: #006699;
 }
 
 .page-explorer .listing .index .button:hover {
-    background-color: #b200cc;
+    background-color: #054c70;
     border-color: transparent;
 }
 
 .t-inverted .u-btn-current:hover {
-    background-color: #b200cc;
+    background-color: #054c70;
     border-color: rgba(0, 0, 0, 0.35);
 }
 
 .t-default .u-btn-current {
     border-color: rgba(0, 0, 0, 0.15);
-    color: #df00ff;
+    color: #006699;
 }
 
 .t-default .u-btn-current:hover {
-    background-color: #b200cc;
+    background-color: #054c70;
     border-color: rgba(0, 0, 0, 0.35);
 }
 
 .listing .button-secondary:hover {
-    background-color: #b200cc;
+    background-color: #054c70;
     border-color: transparent;
 }
 
 .listing .title h2 a:hover {
-    color: #b200cc;
+    color: #054c70;
 }
 
 .object > h2 {
@@ -192,27 +192,27 @@ input[type="checkbox"]:checked:before {
 
 .object > h2 label:before,
 .object > h2:before {
-    background-color: #b200cc !important;
+    background-color: #054c70 !important;
 }
 
 .sequence-controls h3 label {
-    color: #b200cc;
+    color: #054c70;
 }
 
 @media screen and (min-width: 50em) {
     .listing td.children:hover {
-        background-color: #b200cc;
+        background-color: #054c70;
     }
 }
 
 .listing .children a {
-    color: #b200cc;
+    color: #054c70;
     display: block;
 }
 
 @media screen and (min-width: 50em) {
     .listing tr:hover .children {
-        background-color: #df00ff;
+        background-color: #006699;
     }
 }
 
@@ -228,25 +228,25 @@ input[type="checkbox"]:checked:before {
 
   .full .Draftail-Editor--focus {
     background-color: #eff4f8;
-    border-color: #b200cc;
+    border-color: #054c70;
   }
 
   li.sequence-member:hover {
     background-color: #f2f2f3;
-    border-color: #df00ff;
+    border-color: #006699;
   }
 
   .listing .no-children a:hover {
-    color: #df00ff;
+    color: #006699;
   }
   */
 
 .dropdown ul {
-    background-color: #df00ff;
+    background-color: #006699;
 }
 
 .dropdown ul a:hover {
-    background-color: #b200cc;
+    background-color: #054c70;
 }
 
 /*
@@ -262,28 +262,28 @@ input:focus,
 select:focus,
 textarea:focus {
     background-color: #fbf2fc;
-    border-color: #b200cc;
+    border-color: #054c70;
 }
 
 .c-sf-button:focus,
 .c-sf-button:hover {
-    background-color: #b200cc !important;
+    background-color: #054c70 !important;
 }
 
 .full .Draftail-Editor--focus {
     background-color: #fbf2fc !important;
-    border-color: #b200cc !important;
+    border-color: #054c70 !important;
 }
 
 .wagtail-logo-container__desktop .wagtail-logo-container-inner {
-    width: 99px !important;
-    height: 99px !important;
+    width: 100px !important;
+    height: 100px !important;
     margin: auto;
     position: relative;
 }
 
 .replace-file-input:hover button {
-    background-color: #b200cc !important;
+    background-color: #054c70 !important;
 }
 
 /**
