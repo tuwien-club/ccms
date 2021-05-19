@@ -77,6 +77,7 @@ def define_users(sender, **kwargs):
         create_user(username="admin", password="ciscocisco", is_superuser=True)
         create_user(username="cisco", password="ciscocisco")
 
+
 class UsersConfig(AppConfig):
     name = "esite.user"
 

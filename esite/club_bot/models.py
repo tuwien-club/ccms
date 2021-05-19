@@ -23,6 +23,7 @@ from bifrost.publisher.actions import register_publisher
 
 # Create your models here.
 
+
 @register_setting
 @register_publisher(read_singular=True)
 class ClubSettings(BaseSetting):
@@ -59,10 +60,9 @@ class ClubSettings(BaseSetting):
     )
     blacklist = models.TextField(
         blank=False,
-        default="{}",
+        default='{"blacklist":[]}',
         help_text="Site name, used by Open Graph.",
     )
-
 
     graphql_fields = [
         GraphQLString("club_name"),

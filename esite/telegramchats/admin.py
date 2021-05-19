@@ -6,28 +6,41 @@ from wagtail.contrib.modeladmin.options import (
     ModelAdminGroup,
     modeladmin_register,
 )
-from .models import TelegramChat, TelegramChatGroup, TelegramChatGroupClub, TelegramChatGroupClubStudy, TelegramChatGroupClubTopic
+from .models import (
+    TelegramChat,
+    TelegramChatGroup,
+    TelegramChatGroupClub,
+    TelegramChatGroupClubStudy,
+    TelegramChatGroupClubTopic,
+)
+
 
 class GroupType(SimpleListFilter):
     """
     This filter is being used in wagtail admin panel in member model. !notimplemented
     """
-    title = 'has telegram username'
-    parameter_name = 'Grouptype__has'
+
+    title = "has telegram username"
+    parameter_name = "Grouptype__has"
 
     def lookups(self, request, model_admin):
         return (
-            ('1', 'Yes'),
-            ('0', 'No'),
+            ("1", "Yes"),
+            ("0", "No"),
         )
 
     def queryset(self, request, queryset):
         if not self.value():
             return queryset
-        if self.value() == '1':
-            return queryset.filter().exclude(Q(telegram_username__isnull=True) | Q(telegram_username__exact=''))
-        elif self.value() == '0':
-            return queryset.filter(Q(telegram_username__isnull=True) | Q(telegram_username__exact=''))
+        if self.value() == "1":
+            return queryset.filter().exclude(
+                Q(telegram_username__isnull=True) | Q(telegram_username__exact="")
+            )
+        elif self.value() == "0":
+            return queryset.filter(
+                Q(telegram_username__isnull=True) | Q(telegram_username__exact="")
+            )
+
 
 class TelegramChatAdmin(ModelAdmin):
     model = TelegramChat
@@ -41,6 +54,7 @@ class TelegramChatAdmin(ModelAdmin):
     list_display = ("chat_id",)
     search_fields = ("chat_id",)
 
+
 class TelegramChatGroupAdmin(ModelAdmin):
     model = TelegramChatGroup
     menu_label = "Groups"
@@ -53,6 +67,7 @@ class TelegramChatGroupAdmin(ModelAdmin):
     list_display = ("chat_id",)
     search_fields = ("chat_id",)
 
+
 class TelegramChatGroupClubAdmin(ModelAdmin):
     model = TelegramChatGroupClub
     menu_label = "Groups"
@@ -63,8 +78,9 @@ class TelegramChatGroupClubAdmin(ModelAdmin):
 
     # Listed in the user overview
     list_display = ("chat_id",)
-    #list_filter = (GroupType)
+    # list_filter = (GroupType)
     search_fields = ("chat_id",)
+
 
 class TelegramChatGroupClubTopicAdmin(ModelAdmin):
     model = TelegramChatGroupClubTopic
@@ -78,6 +94,7 @@ class TelegramChatGroupClubTopicAdmin(ModelAdmin):
     list_display = ("chat_id",)
     search_fields = ("chat_id",)
 
+
 class TelegramChatGroupClubStudyAdmin(ModelAdmin):
     model = TelegramChatGroupClubStudy
     menu_label = "Study Groups"
@@ -89,6 +106,7 @@ class TelegramChatGroupClubStudyAdmin(ModelAdmin):
     # Listed in the user overview
     list_display = ("chat_id",)
     search_fields = ("chat_id",)
+
 
 # SPDX-License-Identifier: (EUPL-1.2)
 # Copyright © 2019-2020 Simon Prast

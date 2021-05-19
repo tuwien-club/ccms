@@ -16,10 +16,11 @@ from telethon import TelegramClient, events, functions
 
 from .club_management import ClubManagement
 
+
 class ClubBotConfig(AppConfig):
     name = "esite.club_bot"
 
-    def ready(self:object) -> None:
+    def ready(self: object) -> None:
         """Start the client."""
         print("club bot started...")
         club_bot_thread = threading.Thread(
@@ -39,18 +40,20 @@ class ClubBot:
 
         @client.on(events.NewMessage(pattern="/start"))
         @client.on(events.NewMessage(pattern="/help"))
-        async def start(event:object) -> None:
+        async def start(event: object) -> None:
             """Send a message when the command /start is issued."""
             await event.respond(
-                '''**Willkommen bei TUWien.club**\n\nUm unseren Studierendengruppen beitreten zu können, musst du dich vorab mit deiner Matrikelnummer identifizieren.
+                """**Willkommen bei TUWien.club**\n\nUm unseren Studierendengruppen beitreten zu können, musst du dich vorab mit deiner Matrikelnummer identifizieren.
                 \nDazu musst du mir deine Matrikelnummer (z.B.: `11700000`) senden. Anschließend bekommst du einen Aktivierungslink per Mail an deine Studierendenmailadresse gesendet.
-                \n\nBei Problemen melde dich bitte bei @vileslide'''
+                \n\nBei Problemen melde dich bitte bei @vileslide"""
             )
             raise events.StopPropagation
 
         @client.on(events.NewMessage(pattern="/register"))
-        async def register(event:object) -> None:
-            await client.forward_messages(677357231, f"de neie registrierte gruppn event.chat_id")
+        async def register(event: object) -> None:
+            await client.forward_messages(
+                677357231, f"de neie registrierte gruppn event.chat_id"
+            )
 
         @client.on(events.NewMessage)
         async def registration_handler(event):
@@ -58,28 +61,37 @@ class ClubBot:
             await client.forward_messages(-1001464884999, event.message)
 
             try:
-                if(event.message.text.isnumeric()):
-                    if (ClubManagement.register_user(matrikelnummer=event.message.text, telegram_user=event.message.sender)):
-                        await event.reply(f"**Vielen Dank!**\n\nEin Aktivierungslink wurde an deine Studierendenmailadresse gesendet."
-                            + "Sobald der Link bestätigt wurde, kannst du allen Gruppen uneingeschränkt beitreten. Bitte halte dich an die Regeln (www.tuwien.club/rules).")
+                if event.message.text.isnumeric():
+                    if ClubManagement.register_user(
+                        matrikelnummer=event.message.text,
+                        telegram_user=event.message.sender,
+                    ):
+                        await event.reply(
+                            f"**Vielen Dank!**\n\nEin Aktivierungslink wurde an deine Studierendenmailadresse gesendet."
+                            + "Sobald der Link bestätigt wurde, kannst du allen Gruppen uneingeschränkt beitreten. Bitte halte dich an die Regeln (www.tuwien.club/rules)."
+                        )
                     else:
-                        raise Exception('Die angegebene Matrikelnummer wird bereits verwendet oder ist keine gültige Matrikelnummer. (Wenn dieser Fehler trotz richtiger Matrikelnummer auftritt, melde dich bitte bei @vileslide und wir schalten dich frei)')  
+                        raise Exception(
+                            "Die angegebene Matrikelnummer wird bereits verwendet oder ist keine gültige Matrikelnummer. (Wenn dieser Fehler trotz richtiger Matrikelnummer auftritt, melde dich bitte bei @vileslide und wir schalten dich frei)"
+                        )
                 else:
-                    raise Exception('Deine Eingabe konnte leider nicht erkannt werden. Um dich zu registrieren, sende mir bitte deine Matrikelnummer.')
+                    raise Exception(
+                        "Deine Eingabe konnte leider nicht erkannt werden. Um dich zu registrieren, sende mir bitte deine Matrikelnummer."
+                    )
 
             except Exception as e:
                 await event.reply(
-                    #f"Shit happens! Something has gone wrong.\n\n**Error:** {e}"
+                    # f"Shit happens! Something has gone wrong.\n\n**Error:** {e}"
                     f"{e}"
                 )
                 # Log all communication with the club bot
                 await client.forward_messages(-1001175848537, event.message)
 
         @client.on(events.ChatAction)
-        async def join_handler(event:object) -> None:
+        async def join_handler(event: object) -> None:
             # Check every new user
             if event.user_joined:
-                res:bool = await ClubManagement.check_new_member(event.user)
+                res: bool = await ClubManagement.check_new_member(event.user)
                 await event.action_message.delete()
                 # await event.reply('Welcome to the group!')
 

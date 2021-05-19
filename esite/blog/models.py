@@ -29,6 +29,7 @@ from bifrost.publisher.options import PublisherOptions
 from esite.utils.models import BasePage
 from .blocks import StreamFieldBlock
 
+
 @register_publisher(read_singular=True)
 class HomePage(BasePage):
     template = "patterns/pages/home/home_page.html"
@@ -71,6 +72,7 @@ class HomePage(BasePage):
             )
         ]
     )
+
 
 @register_publisher(read_singular=True)
 class AuthorPage(BasePage):
@@ -134,7 +136,7 @@ class BlogPage(HeadlessPreviewMixin, BasePage):
     author = models.ForeignKey(
         AuthorPage, null=True, blank=True, on_delete=models.SET_NULL, related_name="+"
     )
-    
+
     body = StreamField(StreamFieldBlock())
 
     content_panels = BasePage.content_panels + [

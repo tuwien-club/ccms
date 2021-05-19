@@ -1,7 +1,12 @@
 from django.db import models
 from bifrost.decorators import login_required
 from modelcluster.fields import ParentalKey
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel, MultiFieldPanel
+from wagtail.admin.edit_handlers import (
+    FieldPanel,
+    InlinePanel,
+    StreamFieldPanel,
+    MultiFieldPanel,
+)
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core.fields import StreamField
 from wagtail.core.models import Orderable, Page
@@ -43,6 +48,7 @@ class TelegramChat(TimeStampMixin):
         ),
     ]
 
+
 # @register_publisher(
 #     read_singular=True,
 #     read_singular_permission=login_required,
@@ -57,6 +63,7 @@ class TelegramChatGroup(TelegramChat):
             required=True,
         ),
     ]
+
 
 # @register_publisher(
 #     read_singular=True,
@@ -87,7 +94,7 @@ class TelegramChatGroupClub(TelegramChatGroup):
             required=True,
         ),
     ]
-    
+
     panels = [
         MultiFieldPanel(
             [
@@ -101,9 +108,10 @@ class TelegramChatGroupClub(TelegramChatGroup):
             [
                 FieldPanel("study"),
             ],
-            "Studies"
+            "Studies",
         ),
     ]
+
 
 # @register_publisher(
 #     read_singular=True,
@@ -134,7 +142,7 @@ class TelegramChatGroupClubTopic(TelegramChatGroupClub):
             required=True,
         ),
     ]
-    
+
     panels = [
         MultiFieldPanel(
             [
@@ -149,9 +157,10 @@ class TelegramChatGroupClubTopic(TelegramChatGroupClub):
             [
                 FieldPanel("study"),
             ],
-            "Studies"
+            "Studies",
         ),
     ]
+
 
 # @register_publisher(
 #     read_singular=True,
@@ -204,6 +213,6 @@ class TelegramChatGroupClubStudy(TelegramChatGroupClub):
             [
                 FieldPanel("study"),
             ],
-            "Studies"
+            "Studies",
         ),
     ]

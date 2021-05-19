@@ -8,69 +8,77 @@ import wagtail.core.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('home', '0002_auto_20201027_2246'),
+        ("home", "0002_auto_20201027_2246"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='homepage',
-            name='articles_link',
+            model_name="homepage",
+            name="articles_link",
         ),
         migrations.RemoveField(
-            model_name='homepage',
-            name='articles_linktext',
+            model_name="homepage",
+            name="articles_linktext",
         ),
         migrations.RemoveField(
-            model_name='homepage',
-            name='articles_title',
+            model_name="homepage",
+            name="articles_title",
         ),
         migrations.RemoveField(
-            model_name='homepage',
-            name='featured_image',
+            model_name="homepage",
+            name="featured_image",
         ),
         migrations.RemoveField(
-            model_name='homepage',
-            name='featured_pages_title',
+            model_name="homepage",
+            name="featured_pages_title",
         ),
         migrations.RemoveField(
-            model_name='homepage',
-            name='hero_button_link',
+            model_name="homepage",
+            name="hero_button_link",
         ),
         migrations.RemoveField(
-            model_name='homepage',
-            name='hero_button_text',
+            model_name="homepage",
+            name="hero_button_text",
         ),
         migrations.RemoveField(
-            model_name='homepage',
-            name='hero_introduction',
+            model_name="homepage",
+            name="hero_introduction",
         ),
         migrations.RemoveField(
-            model_name='homepage',
-            name='hero_title',
+            model_name="homepage",
+            name="hero_title",
         ),
         migrations.RemoveField(
-            model_name='homepage',
-            name='news_link',
+            model_name="homepage",
+            name="news_link",
         ),
         migrations.RemoveField(
-            model_name='homepage',
-            name='news_linktext',
+            model_name="homepage",
+            name="news_linktext",
         ),
         migrations.RemoveField(
-            model_name='homepage',
-            name='news_title',
+            model_name="homepage",
+            name="news_title",
         ),
         migrations.RemoveField(
-            model_name='homepage',
-            name='pages_link',
+            model_name="homepage",
+            name="pages_link",
         ),
         migrations.RemoveField(
-            model_name='homepage',
-            name='pages_linktext',
+            model_name="homepage",
+            name="pages_linktext",
         ),
         migrations.AddField(
-            model_name='homepage',
-            name='body',
-            field=wagtail.core.fields.StreamField([('heading', wagtail.core.blocks.CharBlock(form_classname='full title')), ('subheading', wagtail.core.blocks.RichTextBlock())]),
+            model_name="homepage",
+            name="body",
+            field=wagtail.core.fields.StreamField(
+                [
+                    (
+                        "heading",
+                        wagtail.core.blocks.CharBlock(form_classname="full title"),
+                    ),
+                    ("subheading", wagtail.core.blocks.RichTextBlock()),
+                ]
+            ),
         ),
     ]

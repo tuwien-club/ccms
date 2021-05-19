@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # See https://docs.djangoproject.com/en/stable/ref/settings/#installed-apps
 INSTALLED_APPS = [
     # Our own apps
-    #"esite.core",
+    # "esite.core",
     "esite.utils",
     "esite.user",
     "esite.documents",

@@ -207,6 +207,7 @@ class SocialMediaSettings(BaseSetting):
         GraphQLString("site_name"),
     ]
 
+
 @register_setting
 class SystemMessagesSettings(BaseSetting):
     class Meta:

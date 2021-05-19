@@ -1,5 +1,10 @@
 from django.contrib.auth.validators import UnicodeUsernameValidator
-from bifrost.api.models import GraphQLBoolean, GraphQLInt, GraphqlDatetime, GraphQLString
+from bifrost.api.models import (
+    GraphQLBoolean,
+    GraphQLInt,
+    GraphqlDatetime,
+    GraphQLString,
+)
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from modelcluster.models import ClusterableModel
@@ -14,8 +19,11 @@ from django.contrib.auth.models import Group
 
 User = get_user_model()
 
+
 class Member(ClusterableModel):
-    user = ParentalKey("user.SNEKUser", blank=True, on_delete=models.CASCADE, related_name="member")
+    user = ParentalKey(
+        "user.SNEKUser", blank=True, on_delete=models.CASCADE, related_name="member"
+    )
 
     matrikelnummer = models.CharField(
         "matrikelnummer",
@@ -25,7 +33,7 @@ class Member(ClusterableModel):
         max_length=36,
         validators=[UnicodeUsernameValidator],
     )
-    
+
     telegram_username = models.CharField(
         "telegram username",
         blank=True,
@@ -53,8 +61,8 @@ class Member(ClusterableModel):
     is_member = models.BooleanField(
         "is member",
         default=False,
-        help_text='Designates whether this member should be treated as active. '
-            + 'Unselect this instead of deleting accounts.',
+        help_text="Designates whether this member should be treated as active. "
+        + "Unselect this instead of deleting accounts.",
     )
 
     def is_club_member(self, info, **kwargs):
@@ -68,7 +76,6 @@ class Member(ClusterableModel):
 
     def email(self, **kwargs):
         return self.user.email
-
 
     # Panels/fields to fill in the Add enterprise form
     panels = [
@@ -102,11 +109,13 @@ class Member(ClusterableModel):
     def __str__(self):
         return f"{self.matrikelnummer}"
 
+
 # Model manager to use in Proxy model
 class InactiveProxyManager(models.Manager):
     def get_queryset(self):
         # filter the objects for non-customer datasets based on the User model
         return super(InactiveProxyManager, self).get_queryset().filter(is_member=False)
+
 
 # Model manager to use in Proxy model
 # class MemberProxyManager(BaseUserManager):

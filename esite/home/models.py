@@ -37,6 +37,7 @@ from bifrost.publisher.options import PublisherOptions
 from esite.utils.models import BasePage
 from .blocks import StreamFieldBlock
 
+
 @register_publisher(
     read_singular=True,
     create=True,
@@ -87,7 +88,7 @@ class HomePage(BasePage):
     )
 
     body = StreamField(StreamFieldBlock())
-    
+
     graphql_fields = [
         GraphQLString(
             "slug",
@@ -97,7 +98,9 @@ class HomePage(BasePage):
         GraphQLString(
             "title",
             required=True,
-            publisher_options=PublisherOptions(create=True, update=True, read=True, delete=True),
+            publisher_options=PublisherOptions(
+                create=True, update=True, read=True, delete=True
+            ),
         ),
         GraphQLString(
             "city",

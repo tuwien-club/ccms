@@ -7,6 +7,7 @@ from wagtail.contrib.modeladmin.options import (
 )
 from .models import Study
 
+
 class StudyAdmin(ModelAdmin):
     model = Study
     menu_label = "Studies"
@@ -20,8 +21,9 @@ class StudyAdmin(ModelAdmin):
     list_filter = ("studytype",)
     search_fields = ("studytype", "studytype")
 
-    #export_filename = 'people_spreadsheet'
-    #list_export = ("date_joined", "matrikelnummer", "email", "telegram_username"),
+    # export_filename = 'people_spreadsheet'
+    # list_export = ("date_joined", "matrikelnummer", "email", "telegram_username"),
+
 
 # SPDX-License-Identifier: (EUPL-1.2)
 # Copyright © 2019-2020 Simon Prast
