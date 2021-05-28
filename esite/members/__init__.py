@@ -1,1 +1,1 @@
-#default_app_config = "esite.user.apps.UsersConfig"
+# default_app_config = "esite.user.apps.UsersConfig"

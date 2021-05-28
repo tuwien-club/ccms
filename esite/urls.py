@@ -41,7 +41,7 @@ private_urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
-    path('activate/<token>', activate_club_member, name='activate'), 
+    path("activate/<token>", activate_club_member, name="activate"),
     # Search cache-control headers are set on the view itself.
     # path('search/', search_views.search, name='search'),
 ]

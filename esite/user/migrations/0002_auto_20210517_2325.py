@@ -7,52 +7,80 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('user', '0001_initial'),
+        ("user", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='snekuser',
-            name='address',
+            model_name="snekuser",
+            name="address",
         ),
         migrations.RemoveField(
-            model_name='snekuser',
-            name='birthdate',
+            model_name="snekuser",
+            name="birthdate",
         ),
         migrations.RemoveField(
-            model_name='snekuser',
-            name='city',
+            model_name="snekuser",
+            name="city",
         ),
         migrations.RemoveField(
-            model_name='snekuser',
-            name='country',
+            model_name="snekuser",
+            name="country",
         ),
         migrations.RemoveField(
-            model_name='snekuser',
-            name='postal_code',
+            model_name="snekuser",
+            name="postal_code",
         ),
         migrations.RemoveField(
-            model_name='snekuser',
-            name='telephone',
+            model_name="snekuser",
+            name="telephone",
         ),
         migrations.AddField(
-            model_name='snekuser',
-            name='registration_token',
-            field=models.CharField(error_messages={'unique': 'A user with that matrikelnummer already exists.'}, help_text='Required. 36 digits long. Digits only.', max_length=36, null=True, verbose_name='registration token'),
+            model_name="snekuser",
+            name="registration_token",
+            field=models.CharField(
+                error_messages={
+                    "unique": "A user with that matrikelnummer already exists."
+                },
+                help_text="Required. 36 digits long. Digits only.",
+                max_length=36,
+                null=True,
+                verbose_name="registration token",
+            ),
         ),
         migrations.AddField(
-            model_name='snekuser',
-            name='telegram_user_id',
-            field=models.IntegerField(error_messages={'unique': 'A user with that user_id already exists.'}, help_text='Required. 64 Bit Integer. Digits only.', null=True, verbose_name='user id'),
+            model_name="snekuser",
+            name="telegram_user_id",
+            field=models.IntegerField(
+                error_messages={"unique": "A user with that user_id already exists."},
+                help_text="Required. 64 Bit Integer. Digits only.",
+                null=True,
+                verbose_name="user id",
+            ),
         ),
         migrations.AddField(
-            model_name='snekuser',
-            name='telegram_username',
-            field=models.CharField(error_messages={'unique': 'A user with that username already exists.'}, help_text='Required. 150 characters or fewer. Letters and digits only.', max_length=36, null=True, validators=[django.contrib.auth.validators.UnicodeUsernameValidator], verbose_name='telegram username'),
+            model_name="snekuser",
+            name="telegram_username",
+            field=models.CharField(
+                error_messages={"unique": "A user with that username already exists."},
+                help_text="Required. 150 characters or fewer. Letters and digits only.",
+                max_length=36,
+                null=True,
+                validators=[django.contrib.auth.validators.UnicodeUsernameValidator],
+                verbose_name="telegram username",
+            ),
         ),
         migrations.AlterField(
-            model_name='snekuser',
-            name='username',
-            field=models.CharField(error_messages={'unique': 'A user with that username already exists.'}, help_text='Required. 36 characters or fewer. Letters, digits and @/./+/-/_ only.', max_length=36, null=True, unique=True, validators=[django.contrib.auth.validators.UnicodeUsernameValidator], verbose_name='Username or Matrikelnummer'),
+            model_name="snekuser",
+            name="username",
+            field=models.CharField(
+                error_messages={"unique": "A user with that username already exists."},
+                help_text="Required. 36 characters or fewer. Letters, digits and @/./+/-/_ only.",
+                max_length=36,
+                null=True,
+                unique=True,
+                validators=[django.contrib.auth.validators.UnicodeUsernameValidator],
+                verbose_name="Username or Matrikelnummer",
+            ),
         ),
     ]

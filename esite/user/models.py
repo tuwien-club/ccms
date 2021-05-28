@@ -1,9 +1,15 @@
 import django.contrib.auth.validators
-from bifrost.api.models import GraphQLBoolean, GraphQLInt, GraphqlDatetime, GraphQLString
+from bifrost.api.models import (
+    GraphQLBoolean,
+    GraphQLInt,
+    GraphqlDatetime,
+    GraphQLString,
+)
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from modelcluster.models import ClusterableModel
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
+
 
 class SNEKUser(AbstractUser, ClusterableModel):
     username = models.CharField(

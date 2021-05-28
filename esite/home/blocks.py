@@ -16,7 +16,4 @@ class StreamFieldBlock(blocks.StreamBlock):
     heading = blocks.CharBlock(classname="full title")
     subheading = blocks.RichTextBlock()
 
-    graphql_fields = [
-        GraphQLString("heading"),
-        GraphQLString("subheading")
-    ]
+    graphql_fields = [GraphQLString("heading"), GraphQLString("subheading")]

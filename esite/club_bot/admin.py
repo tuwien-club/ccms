@@ -8,7 +8,14 @@ from wagtail.contrib.modeladmin.options import (
 # Register your models here.
 from esite.members.admin import MemberAdmin
 from esite.studies.admin import StudyAdmin
-from esite.telegramchats.admin import TelegramChatAdmin, TelegramChatGroupAdmin, TelegramChatGroupClubAdmin, TelegramChatGroupClubTopicAdmin, TelegramChatGroupClubStudyAdmin
+from esite.telegramchats.admin import (
+    TelegramChatAdmin,
+    TelegramChatGroupAdmin,
+    TelegramChatGroupClubAdmin,
+    TelegramChatGroupClubTopicAdmin,
+    TelegramChatGroupClubStudyAdmin,
+)
+
 
 class ClubManagementAdmin(ModelAdminGroup):
     menu_label = "Club Management"
@@ -16,7 +23,12 @@ class ClubManagementAdmin(ModelAdminGroup):
     menu_order = 110
     add_to_settings_menu = False
     exclude_from_explorer = False
-    items = (MemberAdmin, StudyAdmin, TelegramChatGroupClubTopicAdmin, TelegramChatGroupClubStudyAdmin)
+    items = (
+        MemberAdmin,
+        StudyAdmin,
+        TelegramChatGroupClubTopicAdmin,
+        TelegramChatGroupClubStudyAdmin,
+    )
 
 
 modeladmin_register(ClubManagementAdmin)

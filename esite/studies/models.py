@@ -43,10 +43,8 @@ class Study(TimeStampMixin):
     studytype = models.CharField(
         null=True, blank=False, choices=STUDY_TYPES, max_length=255
     )
-    
-    studyname = models.CharField(
-        null=True, blank=False, max_length=255
-    )
+
+    studyname = models.CharField(null=True, blank=False, max_length=255)
 
     graphql_fields = [
         GraphQLString(
@@ -96,11 +94,13 @@ class StudyPage(BasePage):
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
         ),
-        GraphQLStreamfield("body",
+        GraphQLStreamfield(
+            "body",
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
         ),
     ]
+
 
 @register_publisher(
     read_singular=True,
@@ -110,7 +110,7 @@ class StudyIndex(BasePage):
     template = "patterns/pages/people/person_index_page.html"
 
     # Only allow creating HomePages at the root level
-    #parent_page_types = ["home.HomePage"]
+    # parent_page_types = ["home.HomePage"]
     parent_page_types = ["wagtailcore.Page"]
     subpage_types = ["StudyPage"]
 
@@ -118,9 +118,7 @@ class StudyIndex(BasePage):
         verbose_name = "Study Index"
 
     def get_context(self, request, *args, **kwargs):
-        studies = (
-            StudyPage.objects.live().public().descendant_of(self).order_by("slug")
-        )
+        studies = StudyPage.objects.live().public().descendant_of(self).order_by("slug")
 
         page_number = request.GET.get("page", 1)
         paginator = Paginator(studies, settings.DEFAULT_PER_PAGE)
@@ -147,5 +145,5 @@ class StudyIndex(BasePage):
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
         )
-    #    GraphQLCollection(GraphQLPage, "get_context.studies", StudyPage)
+        #    GraphQLCollection(GraphQLPage, "get_context.studies", StudyPage)
     ]
