@@ -1,7 +1,7 @@
 $(function () {
     console.log($(".wagtail-logo-container-inner"));
     document.querySelector(".wagtail-logo-container-inner").innerHTML =
-        '<img class="wagtail-logo wagtail-logo__body" src="/static/core/seal1.svg" alt="">';
+        '<img class="wagtail-logo wagtail-logo__body" src="/static/core/logo.svg" alt="">';
 });
 
 /**
