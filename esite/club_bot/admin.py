@@ -12,8 +12,6 @@ from esite.telegramchats.admin import (
     TelegramChatAdmin,
     TelegramChatGroupAdmin,
     TelegramChatGroupClubAdmin,
-    TelegramChatGroupClubTopicAdmin,
-    TelegramChatGroupClubStudyAdmin,
 )
 
 
@@ -26,8 +24,7 @@ class ClubManagementAdmin(ModelAdminGroup):
     items = (
         MemberAdmin,
         StudyAdmin,
-        TelegramChatGroupClubTopicAdmin,
-        TelegramChatGroupClubStudyAdmin,
+        TelegramChatGroupClubAdmin,
     )
 
 

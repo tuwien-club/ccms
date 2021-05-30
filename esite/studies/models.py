@@ -60,6 +60,13 @@ class Study(TimeStampMixin):
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
         ),
+        # pls neeeko wizard des issue away #NeekoMagic
+        # GraphQLForeignKey(
+        #     "st_telegram_club_group",
+        #     "telegramchats.TelegramChatGroupClub",
+        #     publisher_options=PublisherOptions(read=True, update=True, create=True),
+        #     required=True,
+        # ),
     ]
 
     def __str__(self):

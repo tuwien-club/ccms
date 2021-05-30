@@ -10,8 +10,6 @@ from .models import (
     TelegramChat,
     TelegramChatGroup,
     TelegramChatGroupClub,
-    TelegramChatGroupClubStudy,
-    TelegramChatGroupClubTopic,
 )
 
 
@@ -79,32 +77,6 @@ class TelegramChatGroupClubAdmin(ModelAdmin):
     # Listed in the user overview
     list_display = ("chat_id",)
     # list_filter = (GroupType)
-    search_fields = ("chat_id",)
-
-
-class TelegramChatGroupClubTopicAdmin(ModelAdmin):
-    model = TelegramChatGroupClubTopic
-    menu_label = "Topic Groups"
-    menu_icon = "user"
-    menu_order = 290
-    add_to_settings_menu = False
-    exclude_from_explorer = False
-
-    # Listed in the user overview
-    list_display = ("chat_id",)
-    search_fields = ("chat_id",)
-
-
-class TelegramChatGroupClubStudyAdmin(ModelAdmin):
-    model = TelegramChatGroupClubStudy
-    menu_label = "Study Groups"
-    menu_icon = "user"
-    menu_order = 290
-    add_to_settings_menu = False
-    exclude_from_explorer = False
-
-    # Listed in the user overview
-    list_display = ("chat_id",)
     search_fields = ("chat_id",)
 
 

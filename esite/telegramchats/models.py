@@ -38,7 +38,7 @@ from esite.utils.models import BasePage, TimeStampMixin
 #     read_singular_permission=login_required,
 # )
 class TelegramChat(TimeStampMixin):
-    chat_id = models.IntegerField()
+    chat_id = models.IntegerField(null=True, blank=True)
 
     graphql_fields = [
         GraphQLString(
@@ -47,6 +47,9 @@ class TelegramChat(TimeStampMixin):
             required=True,
         ),
     ]
+
+    class Meta:
+        abstract = True
 
 
 # @register_publisher(
@@ -54,7 +57,7 @@ class TelegramChat(TimeStampMixin):
 #     read_singular_permission=login_required,
 # )
 class TelegramChatGroup(TelegramChat):
-    name = models.CharField(max_length=39)
+    name = models.CharField(null=True, blank=True, max_length=39)
 
     graphql_fields = [
         GraphQLInt(
@@ -64,6 +67,8 @@ class TelegramChatGroup(TelegramChat):
         ),
     ]
 
+    class Meta:
+        abstract = True
 
 # @register_publisher(
 #     read_singular=True,
@@ -71,54 +76,15 @@ class TelegramChatGroup(TelegramChat):
 # )
 class TelegramChatGroupClub(TelegramChatGroup):
     member = models.ManyToManyField(
-        "members.Member", blank=True, related_name="telegram_club_group"
+        "members.Member", blank=True, related_name="me_telegram_club_group"
     )
     study = models.ManyToManyField(
-        "studies.Study", blank=True, related_name="telegram_club_group"
+        "studies.Study", blank=True, related_name="st_telegram_club_group"
     )
 
-    graphql_fields = [
-        GraphQLInt(
-            "chat_id",
-            publisher_options=PublisherOptions(read=True, update=True, create=True),
-            required=True,
-        ),
-        GraphQLString(
-            "member",
-            publisher_options=PublisherOptions(read=True, update=True, create=True),
-            required=True,
-        ),
-        GraphQLString(
-            "study",
-            publisher_options=PublisherOptions(read=True, update=True, create=True),
-            required=True,
-        ),
-    ]
-
-    panels = [
-        MultiFieldPanel(
-            [
-                FieldPanel("name"),
-                FieldPanel("chat_id"),
-                FieldPanel("member"),
-            ],
-            "Settings",
-        ),
-        MultiFieldPanel(
-            [
-                FieldPanel("study"),
-            ],
-            "Studies",
-        ),
-    ]
-
-
-# @register_publisher(
-#     read_singular=True,
-#     read_singular_permission=login_required,
-# )
-class TelegramChatGroupClubTopic(TelegramChatGroupClub):
-    topic = models.CharField(max_length=39)
+    topic = models.CharField(null=True, blank=True, max_length=39)
+    lva_nummer = models.CharField(null=True, blank=True, max_length=39)
+    semester = models.CharField(null=True, blank=True, max_length=39)
 
     graphql_fields = [
         GraphQLInt(
@@ -126,63 +92,18 @@ class TelegramChatGroupClubTopic(TelegramChatGroupClub):
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
         ),
-        GraphQLString(
-            "member",
-            publisher_options=PublisherOptions(read=True, update=True, create=True),
-            required=True,
-        ),
-        GraphQLString(
-            "study",
-            publisher_options=PublisherOptions(read=True, update=True, create=True),
-            required=True,
-        ),
+        # GraphQLString(
+        #     "member",
+        #     publisher_options=PublisherOptions(read=True, update=True, create=True),
+        #     required=True,
+        # ),
+        # GraphQLString(
+        #     "study",
+        #     publisher_options=PublisherOptions(read=True, update=True, create=True),
+        #     required=True,
+        # ),
         GraphQLString(
             "topic",
-            publisher_options=PublisherOptions(read=True, update=True, create=True),
-            required=True,
-        ),
-    ]
-
-    panels = [
-        MultiFieldPanel(
-            [
-                FieldPanel("name"),
-                FieldPanel("topic"),
-                FieldPanel("chat_id"),
-                FieldPanel("member"),
-            ],
-            "Settings",
-        ),
-        MultiFieldPanel(
-            [
-                FieldPanel("study"),
-            ],
-            "Studies",
-        ),
-    ]
-
-
-# @register_publisher(
-#     read_singular=True,
-#     read_singular_permission=login_required,
-# )
-class TelegramChatGroupClubStudy(TelegramChatGroupClub):
-    lva_nummer = models.CharField(max_length=39)
-    semester = models.CharField(max_length=39)
-
-    graphql_fields = [
-        GraphQLInt(
-            "chat_id",
-            publisher_options=PublisherOptions(read=True, update=True, create=True),
-            required=True,
-        ),
-        GraphQLString(
-            "member",
-            publisher_options=PublisherOptions(read=True, update=True, create=True),
-            required=True,
-        ),
-        GraphQLString(
-            "studie",
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
         ),
@@ -203,7 +124,7 @@ class TelegramChatGroupClubStudy(TelegramChatGroupClub):
             [
                 FieldPanel("name"),
                 FieldPanel("chat_id"),
-                FieldPanel("member"),
+                FieldPanel("topic"),
                 FieldPanel("lva_nummer"),
                 FieldPanel("semester"),
             ],
@@ -211,6 +132,7 @@ class TelegramChatGroupClubStudy(TelegramChatGroupClub):
         ),
         MultiFieldPanel(
             [
+                FieldPanel("member"),
                 FieldPanel("study"),
             ],
             "Studies",
