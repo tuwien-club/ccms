@@ -79,10 +79,10 @@ class TelegramChatGroup(TelegramChat):
 )
 class TelegramChatGroupClub(TelegramChatGroup):
     member = models.ManyToManyField(
-        "members.Member", blank=True, related_name="telegram_club_group"
+        "members.Member", blank=True, related_name="telegram_club_groups"
     )
     study = models.ManyToManyField(
-        "studies.Study", blank=True, related_name="telegram_club_group"
+        "studies.Study", blank=True, related_name="telegram_club_groups"
     )
 
     topic = models.CharField(null=True, blank=True, max_length=39)

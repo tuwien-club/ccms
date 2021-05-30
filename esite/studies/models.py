@@ -60,12 +60,7 @@ class Study(TimeStampMixin):
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
         ),
-        GraphQLForeignKey(
-            "telegram_club_group",
-            "telegramchats.TelegramChatGroupClub",
-            publisher_options=PublisherOptions(read=True, update=True, create=True),
-            required=True,
-        ),
+        GraphQLCollection(GraphQLForeignKey, "telegram_club_groups", "telegramchats.TelegramChatGroupClub", publisher_options=PublisherOptions(read=True, update=True, create=True), required=True),
     ]
 
     def __str__(self):
