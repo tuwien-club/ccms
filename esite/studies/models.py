@@ -83,12 +83,10 @@ class StudyPage(BasePage):
         "studies.Study", null=True, on_delete=models.SET_NULL, related_name="study_page"
     )
 
-    body = StreamField(StreamFieldBlock())
-
     class Meta:
         verbose_name = "Study page"
 
-    content_panels = BasePage.content_panels + [FieldPanel("study"), StreamFieldPanel("body")]
+    content_panels = BasePage.content_panels + [FieldPanel("study")]
 
     graphql_fields = [
         GraphQLString(
@@ -104,11 +102,6 @@ class StudyPage(BasePage):
         GraphQLForeignKey(
             "study",
             Study,
-            publisher_options=PublisherOptions(read=True, update=True, create=True),
-            required=True,
-        ),
-        GraphQLStreamfield(
-            "body",
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
         ),

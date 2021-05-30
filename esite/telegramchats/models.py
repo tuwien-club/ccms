@@ -59,9 +59,9 @@ class TelegramChat(TimeStampMixin):
 class TelegramChatGroup(TelegramChat):
     name = models.CharField(null=True, blank=True, max_length=39)
 
-    graphql_fields = [
+    graphql_fields = TelegramChat.graphql_fields + [
         GraphQLInt(
-            "chat_id",
+            "name",
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
         ),
@@ -89,12 +89,7 @@ class TelegramChatGroupClub(TelegramChatGroup):
     lva_nummer = models.CharField(null=True, blank=True, max_length=39)
     semester = models.CharField(null=True, blank=True, max_length=39)
 
-    graphql_fields = [
-        GraphQLInt(
-            "chat_id",
-            publisher_options=PublisherOptions(read=True, update=True, create=True),
-            required=True,
-        ),
+    graphql_fields = TelegramChatGroup.graphql_fields + [
         GraphQLString(
             "member",
             publisher_options=PublisherOptions(read=True, update=True, create=True),
