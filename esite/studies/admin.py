@@ -17,9 +17,9 @@ class StudyAdmin(ModelAdmin):
     exclude_from_explorer = False
 
     # Listed in the user overview
-    list_display = ("studytype", "studytype")
-    list_filter = ("studytype",)
-    search_fields = ("studytype", "studytype")
+    list_display = ("study_name", "study_type")
+    list_filter = ("study_type",)
+    search_fields = ("study_name", "study_type")
 
     # export_filename = 'people_spreadsheet'
     # list_export = ("date_joined", "matrikelnummer", "email", "telegram_username"),
