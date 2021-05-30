@@ -49,7 +49,7 @@ class HowtoPage(BasePage):
     template = "patterns/pages/home/home_page.html"
 
     # Only allow creating HomePages at the root level
-    # parent_page_types = ["wagtailcore.Page"]
+    parent_page_types = ["home.HomePage"]
     # subpage_types = []
 
     class Meta:

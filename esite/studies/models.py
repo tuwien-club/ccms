@@ -33,6 +33,9 @@ from .blocks import StreamFieldBlock
 
 @register_publisher(
     read_singular=True,
+    create=True,
+    update=True,
+    delete=True,
 )
 class Study(TimeStampMixin):
     STUDY_TYPES = (
@@ -65,6 +68,9 @@ class Study(TimeStampMixin):
 
 @register_publisher(
     read_singular=True,
+    create=True,
+    update=True,
+    delete=True,
 )
 class StudyPage(BasePage):
     parent_page_types = ["studies.StudyIndex"]
@@ -73,7 +79,7 @@ class StudyPage(BasePage):
     show_in_menus_default = False
 
     class Meta:
-        verbose_name = "Person Page"
+        verbose_name = "Study page"
 
     study = models.OneToOneField(
         "studies.Study", null=True, on_delete=models.SET_NULL, related_name="study_page"
@@ -81,7 +87,7 @@ class StudyPage(BasePage):
 
     body = StreamField(StreamFieldBlock())
 
-    content_panels = BasePage.content_panels + [StreamFieldPanel("body")]
+    content_panels = BasePage.content_panels + [FieldPanel("study"), StreamFieldPanel("body")]
 
     graphql_fields = [
         GraphQLString(
@@ -91,6 +97,12 @@ class StudyPage(BasePage):
         ),
         GraphQLString(
             "title",
+            publisher_options=PublisherOptions(read=True, update=True, create=True),
+            required=True,
+        ),
+        GraphQLForeignKey(
+            "study",
+            Study,
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
         ),
@@ -111,8 +123,8 @@ class StudyIndex(BasePage):
 
     # Only allow creating HomePages at the root level
     # parent_page_types = ["home.HomePage"]
-    parent_page_types = ["wagtailcore.Page"]
-    subpage_types = ["StudyPage"]
+    parent_page_types = ["home.HomePage"]
+    #subpage_types = ["StudyPage"]
 
     class Meta:
         verbose_name = "Study Index"
