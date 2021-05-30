@@ -63,7 +63,7 @@ class Study(TimeStampMixin):
     ]
 
     def __str__(self):
-        return self.studyname
+        return self.study_name
 
 
 @register_publisher(
