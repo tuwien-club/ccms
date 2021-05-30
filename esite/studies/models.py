@@ -85,14 +85,14 @@ class StudyPage(BasePage):
 
     show_in_menus_default = False
 
-    class Meta:
-        verbose_name = "Study page"
-
     study = models.OneToOneField(
         "studies.Study", null=True, on_delete=models.SET_NULL, related_name="study_page"
     )
 
     body = StreamField(StreamFieldBlock())
+
+    class Meta:
+        verbose_name = "Study page"
 
     content_panels = BasePage.content_panels + [FieldPanel("study"), StreamFieldPanel("body")]
 
@@ -133,8 +133,12 @@ class StudyIndex(BasePage):
     parent_page_types = ["home.HomePage"]
     #subpage_types = ["StudyPage"]
 
+    body = StreamField(StreamFieldBlock())
+
     class Meta:
         verbose_name = "Study Index"
+
+    content_panels = BasePage.content_panels + [StreamFieldPanel("body")]
 
     def get_context(self, request, *args, **kwargs):
         studies = StudyPage.objects.live().public().descendant_of(self).order_by("slug")
@@ -163,6 +167,11 @@ class StudyIndex(BasePage):
             "title",
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
-        )
+        ),
+        GraphQLStreamfield(
+            "body",
+            publisher_options=PublisherOptions(read=True, update=True, create=True),
+            required=True,
+        ),
         #    GraphQLCollection(GraphQLPage, "get_context.studies", StudyPage)
     ]
