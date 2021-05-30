@@ -325,6 +325,7 @@ BIFROST_APPS = {
     "utils": "",
     "club_bot": "",
     "members": "",
+    "telegramchats": "",
 }
 
 BIFROST_FILES = False

@@ -70,16 +70,19 @@ class TelegramChatGroup(TelegramChat):
     class Meta:
         abstract = True
 
-# @register_publisher(
-#     read_singular=True,
-#     read_singular_permission=login_required,
-# )
+@register_publisher(
+    read_singular=True,
+    create=True,
+    update=True,
+    delete=True,
+    read_singular_permission=login_required,
+)
 class TelegramChatGroupClub(TelegramChatGroup):
     member = models.ManyToManyField(
-        "members.Member", blank=True, related_name="me_telegram_club_group"
+        "members.Member", blank=True, related_name="telegram_club_group"
     )
     study = models.ManyToManyField(
-        "studies.Study", blank=True, related_name="st_telegram_club_group"
+        "studies.Study", blank=True, related_name="telegram_club_group"
     )
 
     topic = models.CharField(null=True, blank=True, max_length=39)
@@ -92,16 +95,16 @@ class TelegramChatGroupClub(TelegramChatGroup):
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
         ),
-        # GraphQLString(
-        #     "member",
-        #     publisher_options=PublisherOptions(read=True, update=True, create=True),
-        #     required=True,
-        # ),
-        # GraphQLString(
-        #     "study",
-        #     publisher_options=PublisherOptions(read=True, update=True, create=True),
-        #     required=True,
-        # ),
+        GraphQLString(
+            "member",
+            publisher_options=PublisherOptions(read=True, update=True, create=True),
+            required=True,
+        ),
+        GraphQLString(
+            "study",
+            publisher_options=PublisherOptions(read=True, update=True, create=True),
+            required=True,
+        ),
         GraphQLString(
             "topic",
             publisher_options=PublisherOptions(read=True, update=True, create=True),
