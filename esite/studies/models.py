@@ -43,11 +43,11 @@ class Study(TimeStampMixin):
         ("MASTER", "Master"),
     )
 
-    studytype = models.CharField(
+    study_type = models.CharField(
         null=True, blank=False, choices=STUDY_TYPES, max_length=255
     )
 
-    studyname = models.CharField(null=True, blank=False, max_length=255)
+    study_name = models.CharField(null=True, blank=False, max_length=255)
 
     graphql_fields = [
         GraphQLString(

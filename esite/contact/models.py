@@ -55,7 +55,7 @@ class ContactPage(BasePage):
     class Meta:
         verbose_name = "Contact Page"
 
-    body = StreamField(StreamFieldBlock())
+    body = StreamField(StreamFieldBlock(), null=True, blank=True)
 
     graphql_fields = [
         GraphQLString(

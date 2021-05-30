@@ -55,7 +55,7 @@ class FaqPage(BasePage):
     class Meta:
         verbose_name = "FAQ Page"
 
-    body = StreamField(StreamFieldBlock())
+    body = StreamField(StreamFieldBlock(), null=True, blank=True)
 
     graphql_fields = [
         GraphQLString(

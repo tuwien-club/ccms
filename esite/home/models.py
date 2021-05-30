@@ -55,26 +55,26 @@ class HomePage(BasePage):
     class Meta:
         verbose_name = "Home Page"
 
-    city = models.CharField(null=True, blank=False, max_length=255)
-    zip_code = models.CharField(null=True, blank=False, max_length=255)
-    address = models.CharField(null=True, blank=False, max_length=255)
-    telephone = models.CharField(null=True, blank=False, max_length=255)
-    telefax = models.CharField(null=True, blank=False, max_length=255)
-    vat_number = models.CharField(null=True, blank=False, max_length=255)
+    city = models.CharField(null=True, blank=True, max_length=255)
+    zip_code = models.CharField(null=True, blank=True, max_length=255)
+    address = models.CharField(null=True, blank=True, max_length=255)
+    telephone = models.CharField(null=True, blank=True, max_length=255)
+    telefax = models.CharField(null=True, blank=True, max_length=255)
+    vat_number = models.CharField(null=True, blank=True, max_length=255)
     whatsapp_telephone = models.CharField(null=True, blank=True, max_length=255)
     whatsapp_contactline = models.CharField(null=True, blank=True, max_length=255)
-    tax_id = models.CharField(null=True, blank=False, max_length=255)
-    trade_register_number = models.CharField(null=True, blank=False, max_length=255)
-    court_of_registry = models.CharField(null=True, blank=False, max_length=255)
-    place_of_registry = models.CharField(null=True, blank=False, max_length=255)
-    trade_register_number = models.CharField(null=True, blank=False, max_length=255)
-    ownership = models.CharField(null=True, blank=False, max_length=255)
-    email = models.CharField(null=True, blank=False, max_length=255)
+    tax_id = models.CharField(null=True, blank=True, max_length=255)
+    trade_register_number = models.CharField(null=True, blank=True, max_length=255)
+    court_of_registry = models.CharField(null=True, blank=True, max_length=255)
+    place_of_registry = models.CharField(null=True, blank=True, max_length=255)
+    trade_register_number = models.CharField(null=True, blank=True, max_length=255)
+    ownership = models.CharField(null=True, blank=True, max_length=255)
+    email = models.CharField(null=True, blank=True, max_length=255)
 
-    copyrightholder = models.CharField(null=True, blank=False, max_length=255)
+    copyrightholder = models.CharField(null=True, blank=True, max_length=255)
 
-    about = RichTextField(null=True, blank=False)
-    privacy = RichTextField(null=True, blank=False)
+    about = RichTextField(null=True, blank=True)
+    privacy = RichTextField(null=True, blank=True)
 
     sociallinks = StreamField(
         [
@@ -87,7 +87,7 @@ class HomePage(BasePage):
         ]
     )
 
-    body = StreamField(StreamFieldBlock())
+    body = StreamField(StreamFieldBlock(), null=True, blank=True)
 
     graphql_fields = [
         GraphQLString(
