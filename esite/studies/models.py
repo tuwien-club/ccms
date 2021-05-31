@@ -74,7 +74,7 @@ class Study(TimeStampMixin):
     delete=True,
 )
 class StudyPage(BasePage):
-    parent_page_types = ["studies.StudyIndex"]
+    parent_page_types = ["studies.StudyIndexPage"]
     subpage_types = []
 
     show_in_menus_default = False
@@ -82,11 +82,13 @@ class StudyPage(BasePage):
     study = models.OneToOneField(
         "studies.Study", null=True, on_delete=models.SET_NULL, related_name="study_page"
     )
+    
+    body = StreamField(StreamFieldBlock())
 
     class Meta:
         verbose_name = "Study page"
 
-    content_panels = BasePage.content_panels + [FieldPanel("study")]
+    content_panels = BasePage.content_panels + [FieldPanel("study"), StreamFieldPanel("body")]
 
     graphql_fields = [
         GraphQLString(
@@ -105,6 +107,11 @@ class StudyPage(BasePage):
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
         ),
+        GraphQLStreamfield(
+            "body",
+            publisher_options=PublisherOptions(read=True, update=True, create=True),
+            required=True,
+        ),
     ]
 
 
@@ -112,7 +119,7 @@ class StudyPage(BasePage):
     read_singular=True,
     read_singular_permission=login_required,
 )
-class StudyIndex(BasePage):
+class StudyIndexPage(BasePage):
     template = "patterns/pages/people/person_index_page.html"
 
     # Only allow creating HomePages at the root level
@@ -121,6 +128,11 @@ class StudyIndex(BasePage):
     #subpage_types = ["StudyPage"]
 
     body = StreamField(StreamFieldBlock())
+
+    def studies(self):
+        studies = StudyPage.objects.live().public().descendant_of(self).order_by("study")
+
+        return studies
 
     class Meta:
         verbose_name = "Study Index"
@@ -160,5 +172,5 @@ class StudyIndex(BasePage):
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
         ),
-        #    GraphQLCollection(GraphQLPage, "get_context.studies", StudyPage)
+        GraphQLCollection(GraphQLPage, "studies", publisher_options=PublisherOptions(read=True, update=True, create=True), required=True),
     ]
