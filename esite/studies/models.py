@@ -172,5 +172,5 @@ class StudyIndexPage(BasePage):
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
         ),
-        GraphQLCollection(GraphQLPage, "studies", publisher_options=PublisherOptions(read=True, update=True, create=True), required=True),
+        GraphQLCollection(GraphQLForeignKey,, "studies", StudyPage, publisher_options=PublisherOptions(read=True, update=True, create=True), required=True),
     ]
