@@ -129,7 +129,7 @@ class StudyIndexPage(BasePage):
 
     body = StreamField(StreamFieldBlock())
 
-    def studies(self):
+    def studies(self, request, *args, **kwargs):
         studies = StudyPage.objects.live().public().descendant_of(self).order_by("study")
 
         return studies
