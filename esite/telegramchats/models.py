@@ -85,7 +85,7 @@ class TelegramChatGroupClub(TelegramChatGroup):
         "studies.Study", blank=True, related_name="telegram_club_groups"
     )
 
-    semester = models.CharField(null=True, blank=True, max_length=39)
+    semester = models.IntegerField(blank=False, null=False, default=0)
     topic = models.CharField(null=True, blank=True, max_length=39)
     lva_nummer = models.CharField(null=True, blank=True, max_length=39)
 
