@@ -75,7 +75,6 @@ class TelegramChatGroup(TelegramChat):
     create=True,
     update=True,
     delete=True,
-    read_singular_permission=login_required,
 )
 class TelegramChatGroupClub(TelegramChatGroup):
     member = models.ManyToManyField(
