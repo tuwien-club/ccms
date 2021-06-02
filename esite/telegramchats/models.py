@@ -60,7 +60,7 @@ class TelegramChatGroup(TelegramChat):
     name = models.CharField(null=True, blank=True, max_length=39)
 
     graphql_fields = TelegramChat.graphql_fields + [
-        GraphQLInt(
+        GraphQLString(
             "name",
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
@@ -85,9 +85,9 @@ class TelegramChatGroupClub(TelegramChatGroup):
         "studies.Study", blank=True, related_name="telegram_club_groups"
     )
 
+    semester = models.CharField(null=True, blank=True, max_length=39)
     topic = models.CharField(null=True, blank=True, max_length=39)
     lva_nummer = models.CharField(null=True, blank=True, max_length=39)
-    semester = models.CharField(null=True, blank=True, max_length=39)
 
     graphql_fields = TelegramChatGroup.graphql_fields + [
         GraphQLString(
@@ -100,6 +100,11 @@ class TelegramChatGroupClub(TelegramChatGroup):
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
         ),
+        GraphQLInt(
+            "semester",
+            publisher_options=PublisherOptions(read=True, update=True, create=True),
+            required=True,
+        ),
         GraphQLString(
             "topic",
             publisher_options=PublisherOptions(read=True, update=True, create=True),
@@ -107,11 +112,6 @@ class TelegramChatGroupClub(TelegramChatGroup):
         ),
         GraphQLString(
             "lva_nummer",
-            publisher_options=PublisherOptions(read=True, update=True, create=True),
-            required=True,
-        ),
-        GraphQLString(
-            "semester",
             publisher_options=PublisherOptions(read=True, update=True, create=True),
             required=True,
         ),
