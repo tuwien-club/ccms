@@ -66,7 +66,7 @@ class DBIO:
         #    check_res = False
 
         #return check_res
-        return false
+        return False
 
     @staticmethod
     def check_user(check_res: bool = False) -> bool:
