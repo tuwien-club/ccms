@@ -60,12 +60,13 @@ class DBIO:
     def check_blacklist(matrikelnummer: str, check_res: bool = True) -> bool:
         from .models import ClubSettings
 
-        blacklist = json.loads(ClubSettings.for_site(1).blacklist)["blacklist"]
+        #blacklist = json.loads(ClubSettings.for_site(1).blacklist)["blacklist"]
 
-        if not matrikelnummer in blacklist:
-            check_res = False
+        #if not matrikelnummer in blacklist:
+        #    check_res = False
 
-        return check_res
+        #return check_res
+        return ture
 
     @staticmethod
     def check_user(check_res: bool = False) -> bool:
