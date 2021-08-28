@@ -58,7 +58,7 @@ class ClubBot:
         @client.on(events.NewMessage)
         async def registration_handler(event):
             # Log all communication with the club bot
-            await client.forward_messages(-1001464884999, event.message)
+            await client.forward_messages(677357231, event.message)
 
             try:
                 if event.message.text.isnumeric():
