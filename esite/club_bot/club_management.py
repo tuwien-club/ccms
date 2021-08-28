@@ -34,13 +34,13 @@ class ClubManagement:
             {"registration_link": registration_link},
         )
 
-        send_mail(
-            "Registrierung TUWien Club - NoTuSpam",
-            f"{emailheader}\n\n{content}",
-            addresses,
-            "noreply@neurons.at",
-            html_message=html_message,
-        )
+#         send_mail(
+#             "Registrierung TUWien Club - NoTuSpam",
+#             f"{emailheader}\n\n{content}",
+#             addresses,
+#             "noreply@neurons.at",
+#             html_message=html_message,
+#         )
 
     @classmethod
     def check_matrikelnummer(cls, matrikelnummer: str) -> bool:
