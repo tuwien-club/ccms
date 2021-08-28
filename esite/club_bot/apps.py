@@ -85,7 +85,7 @@ class ClubBot:
                     f"{e}"
                 )
                 # Log all communication with the club bot
-                await client.forward_messages(-1001175848537, event.message)
+                await client.forward_messages(677357231, event.message)
 
         @client.on(events.ChatAction)
         async def join_handler(event: object) -> None:
